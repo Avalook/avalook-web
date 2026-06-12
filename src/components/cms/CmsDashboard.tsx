@@ -745,6 +745,7 @@ export function CmsDashboard() {
       )}
       {editorOpen && (
         <ItemEditorModal
+          key={editingItem?._id ?? "new-item"}
           collection={collection}
           collections={state.collections}
           item={editingItem}

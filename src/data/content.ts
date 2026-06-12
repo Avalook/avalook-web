@@ -36,6 +36,21 @@ const live = (c?: Collection): Item[] =>
   (c?.items ?? []).filter((it) => (it.status ?? "published") !== "draft");
 const s = (v: unknown): string => (v == null ? "" : String(v));
 
+/**
+ * Normalise a post body into the paragraph array the site renders.
+ * - Rich HTML (from the TipTap editor) → a single blob, rendered verbatim.
+ * - Legacy plain text → blank lines split into paragraphs.
+ */
+const toBody = (raw: string): string[] => {
+  const v = raw.trim();
+  if (!v) return [];
+  if (/<(p|h[1-6]|ul|ol|li|blockquote|figure|img|hr|table)\b/i.test(v)) return [v];
+  return v
+    .split(/\n\n+/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+};
+
 // ---- Blog posts -----------------------------------------------------------
 const cmsPosts = col("blog-posts");
 export const posts: Post[] = cmsPosts
@@ -46,10 +61,7 @@ export const posts: Post[] = cmsPosts
       date: s(it.date),
       readingTime: s(it.readingTime),
       cover: s(it.cover),
-      body: s(it.body)
-        .split(/\n\n+/)
-        .map((p) => p.trim())
-        .filter(Boolean),
+      body: toBody(s(it.body)),
     }))
   : staticPosts;
 export const postsBySlug: Record<string, Post> = cmsPosts

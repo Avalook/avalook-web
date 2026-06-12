@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { X, ImageOff } from "lucide-react";
 import type { Collection, Field, Item } from "./types";
 import { slugify, uid } from "./storage";
+import { RichTextEditor } from "./RichTextEditor";
 
 type Props = {
   collection: Collection;
@@ -147,15 +148,7 @@ function FieldEditor({
   switch (field.type) {
     case "richtext":
     case "richcontent":
-      return (
-        <textarea
-          id={id}
-          className="cms-textarea"
-          value={asString(value)}
-          placeholder="Write the content… leave a blank line between paragraphs."
-          onChange={(e) => onChange(e.target.value)}
-        />
-      );
+      return <RichTextEditor value={asString(value)} onChange={onChange} />;
 
     case "number":
       return (

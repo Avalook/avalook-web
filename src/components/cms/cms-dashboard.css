@@ -1037,3 +1037,120 @@
     opacity: 1;
   }
 }
+
+/* ── Rich-text editor (Blog Post "Body") ──────────────────────────────── */
+.cms-rte {
+  border: 1px solid var(--cms-line-strong);
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.cms-rte:focus-within {
+  border-color: var(--cms-blue);
+  box-shadow: 0 0 0 3px var(--cms-blue-soft);
+}
+.cms-rte-loading {
+  padding: 16px;
+  font-size: 14px;
+  color: var(--cms-muted);
+}
+.cms-rte-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--cms-line);
+  background: #f7f8fa;
+}
+.cms-rte-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--cms-text);
+  cursor: pointer;
+}
+.cms-rte-btn:hover:not(:disabled) {
+  background: #e9edf3;
+}
+.cms-rte-btn.is-on {
+  background: var(--cms-blue-soft);
+  color: var(--cms-blue);
+}
+.cms-rte-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.cms-rte-sep {
+  width: 1px;
+  height: 18px;
+  margin: 0 4px;
+  background: var(--cms-line-strong);
+}
+.cms-rte-input {
+  min-height: 220px;
+  max-height: 460px;
+  overflow-y: auto;
+  padding: 14px 16px;
+  outline: none;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--cms-text);
+}
+/* TipTap placeholder shown on the empty doc */
+.cms-rte-input p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  color: var(--cms-muted);
+}
+/* live preview of the formatted result inside the editor */
+.cms-rte-input > :first-child {
+  margin-top: 0;
+}
+.cms-rte-input p {
+  margin: 0 0 12px;
+}
+.cms-rte-input h2 {
+  margin: 22px 0 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.cms-rte-input h3 {
+  margin: 18px 0 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.cms-rte-input ul,
+.cms-rte-input ol {
+  margin: 0 0 12px;
+  padding-left: 24px;
+}
+.cms-rte-input li {
+  margin-bottom: 6px;
+}
+.cms-rte-input a {
+  color: var(--cms-blue);
+  text-decoration: underline;
+}
+.cms-rte-input blockquote {
+  margin: 0 0 12px;
+  padding-left: 14px;
+  border-left: 3px solid var(--cms-line-strong);
+  color: var(--cms-muted);
+}
+.cms-rte-input img {
+  max-width: 100%;
+  height: auto;
+  margin: 6px 0;
+  border-radius: 8px;
+}
+.cms-rte-input img.ProseMirror-selectednode {
+  outline: 2px solid var(--cms-blue);
+}

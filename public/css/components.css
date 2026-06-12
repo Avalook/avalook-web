@@ -1561,6 +1561,37 @@ body.menu-open .nav-toggle span {
   text-underline-offset: 4px;
 }
 
+/* Rich-content blocks produced by the CMS editor (TipTap). */
+.rich-copy h2,
+.rich-copy h3 {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+}
+.rich-copy h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); margin: 34px 0 14px; }
+.rich-copy h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); margin: 26px 0 10px; }
+.rich-copy h2:first-child,
+.rich-copy h3:first-child { margin-top: 0; }
+.rich-copy ol { margin: 18px 0 0; padding-left: 22px; }
+.rich-copy ol li { margin-bottom: 10px; }
+.rich-copy strong { color: var(--text); font-weight: 700; }
+.rich-copy em { font-style: italic; }
+.rich-copy blockquote {
+  margin: 22px 0;
+  padding: 4px 0 4px 20px;
+  border-left: 3px solid var(--color-primary);
+  color: var(--text);
+  font-style: italic;
+}
+.rich-copy img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 18px;
+  margin: 24px 0;
+}
+
 .detail-video {
   width: 100%;
   aspect-ratio: 16 / 9;
