@@ -148,22 +148,22 @@
       ],
       "items": [
         {
-          "_id": "/projects/cat-22-and-atman/",
-          "status": "published",
           "title": "CAT-22 and Atman",
           "type": "Short Series",
-          "image": "/assets/img/5c4f61_d477edda700e4bc09c4b4cab46e9282f~mv2.png",
+          "image": "https://jwghwkicvu8vyqls.public.blob.vercel-storage.com/cat-22-un4pPW2iHktaYbRDBQCBtUqQAPDYWN.mp4",
           "accent": "#fff34a",
-          "href": "/projects/cat-22-and-atman/"
+          "href": "/projects/cat-22-and-atman/",
+          "_id": "/projects/cat-22-and-atman/",
+          "status": "published"
         },
         {
-          "_id": "/projects/pudgy-asia--art-contest/",
-          "status": "published",
           "title": "Pudgy Asia Art Contest",
           "type": "Promotion Video",
-          "image": "/assets/img/5c4f61_c1dd6dd686484ab2a049d90c4fb3a00cf000.jpg",
+          "image": "https://jwghwkicvu8vyqls.public.blob.vercel-storage.com/pudgy-1yQjoFr5uobQYIGsyxwEd2rLxxtRS7.mp4",
           "accent": "#43dce8",
-          "href": "/projects/pudgy-asia--art-contest/"
+          "href": "/projects/pudgy-asia--art-contest/",
+          "_id": "/projects/pudgy-asia--art-contest/",
+          "status": "published"
         },
         {
           "title": "Jelly's Bean",
@@ -193,13 +193,13 @@
           "href": "/projects/the-chronicles-of--broken-being/"
         },
         {
-          "_id": "https://x.com/NotForThinking",
-          "status": "published",
           "title": "Not For Thinking",
           "type": "NFT Collection",
-          "image": "/assets/img/5c4f61_26a5bd2726a74f148293d54e203a4edbf000.jpg",
+          "image": "https://jwghwkicvu8vyqls.public.blob.vercel-storage.com/not-for-thinking-TaQiLe6DFQoMZkIqHKF7ebRkSoNB8L.mp4",
           "accent": "#45c8ef",
-          "href": "https://x.com/NotForThinking"
+          "href": "https://x.com/NotForThinking",
+          "_id": "https://x.com/NotForThinking",
+          "status": "published"
         },
         {
           "_id": "/projects/once-upon-her-time/",
