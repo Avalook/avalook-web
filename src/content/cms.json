@@ -1,4 +1,533 @@
 {
-  "collections": [],
-  "activeCollectionId": "blog-posts"
+  "collections": [
+    {
+      "id": "blog-posts",
+      "name": "Blog Posts",
+      "itemNoun": "Post",
+      "fields": [
+        {
+          "id": "title",
+          "name": "Title",
+          "type": "text",
+          "primary": true,
+          "required": true
+        },
+        {
+          "id": "cover",
+          "name": "Cover",
+          "type": "image"
+        },
+        {
+          "id": "date",
+          "name": "Date",
+          "type": "date"
+        },
+        {
+          "id": "readingTime",
+          "name": "Reading Time",
+          "type": "text"
+        },
+        {
+          "id": "excerpt",
+          "name": "Excerpt",
+          "type": "text"
+        },
+        {
+          "id": "body",
+          "name": "Body",
+          "type": "richcontent"
+        },
+        {
+          "id": "slug",
+          "name": "Slug",
+          "type": "text",
+          "helpText": "URL path for the post."
+        }
+      ],
+      "items": [
+        {
+          "_id": "calling-all-business-brains-with-creative-heart-we-are-hiring-a-business-development-manager",
+          "status": "published",
+          "title": "Calling all business brains with creative heart - we are hiring a Business development manager!",
+          "cover": "/assets/img/5c4f61_cada4df827144253b8347a981132f6c3~mv2.jpg",
+          "date": "May 7, 2025",
+          "readingTime": "3 min read",
+          "excerpt": "Location: Hanoi / Ho Chi Minh City (Onsite - Full-time). Avalook is seeking a results-driven Business Development Manager to lead and expand our client portfolio across traditional and blockchain markets.",
+          "body": "Location: Hanoi / Ho Chi Minh City (Onsite - Full-time). Open Positions: 01.\n\nAvalook is seeking a results-driven Business Development Manager to lead and expand our client portfolio across both traditional and blockchain markets. This role is ideal for a strategic thinker with B2B sales experience, a passion for creative industries, and a deep understanding of the Web3 ecosystem.\n\nKey responsibilities include market research, building a high-quality lead pipeline, proactive outreach, preparing proposal materials, reporting sales activity, representing the company at industry events, and collaborating with the Founder and Marketing team on go-to-market strategies.\n\nThe role focuses on both blockchain markets, including NFT and decentralized IP projects, and traditional creative partners such as merchandise companies, game developers, studios, brands, broadcasters and producers.\n\nPreferred candidates have C1 English or higher, an international mindset, strong communication and analytical skills, and genuine interest in IP development, animation, film and creative industries.",
+          "slug": "calling-all-business-brains-with-creative-heart-we-are-hiring-a-business-development-manager"
+        },
+        {
+          "_id": "meet-avalook-team-at-ava-exhibition-2024",
+          "status": "published",
+          "title": "Meet Avalook team at AVA Exhibition 2024!",
+          "cover": "/assets/img/5c4f61_a402d012c796475fbf2590b586687bcf~mv2.png",
+          "date": "Nov 28, 2024",
+          "readingTime": "1 min read",
+          "excerpt": "Avalook joined AVA 2024 as a media partner for AVA Grand Contest 2024 and exhibition partner for AVA Exhibition 2024.",
+          "body": "This past weekend, the AVA 2024 Exhibition officially ended, and Avalook was excited to be part of it not just as a media partner for AVA Grand Contest 2024, but also as an exhibition partner for AVA Exhibition 2024.\n\nFrom start to finish, the weekend was full of energy, creativity and inspiring moments. The team met talented young artists from the AVA Grand Contest and connected with visitors through games, giveaways and conversations.\n\nOne highlight was Founder Quang Dang sharing insights on AI and its impact on creativity, opening meaningful conversations about the future of art.",
+          "slug": "meet-avalook-team-at-ava-exhibition-2024"
+        },
+        {
+          "_id": "exciting-news-mr-quang-dang-the-visionary-founder-of-avalook-has-been-named-the-3rd-judge-in-the",
+          "status": "published",
+          "title": "Exciting news! Mr. Quang Dang, the visionary founder of Avalook, has been named the 3rd judge in the Pudgy Asia Art Contest.",
+          "cover": "/assets/img/5c4f61_6a82eee2a2bd44ec961e48d687c56572~mv2.png",
+          "date": "Nov 28, 2024",
+          "readingTime": "1 min read",
+          "excerpt": "For more information: https://x.com/PunkgaMeManga/status/1832428369658388778",
+          "body": "For more information: <a href=\"https://x.com/PunkgaMeManga/status/1832428369658388778\">https://x.com/PunkgaMeManga/status/1832428369658388778</a>",
+          "slug": "exciting-news-mr-quang-dang-the-visionary-founder-of-avalook-has-been-named-the-3rd-judge-in-the"
+        },
+        {
+          "_id": "we-re-thrilled-to-announce-that-avalook-is-proudly-sponsoring-non-fungible-saigon-2024-the-ultimate",
+          "status": "published",
+          "title": "We're thrilled to announce that Avalook is proudly sponsoring Non-Fungible Saigon 2024-the ultimate event for artists, creators, and NFT enthusiasts in Vietnam!",
+          "cover": "/assets/img/5c4f61_5e8c5955352048549758dd3ea9abeb95~mv2.png",
+          "date": "Nov 28, 2024",
+          "readingTime": "1 min read",
+          "excerpt": "Avalook proudly sponsored Non-Fungible Saigon 2024, an event for artists, creators and NFT enthusiasts in Vietnam.",
+          "body": "For more information: <a href=\"https://x.com/nonfungiblesgn/status/1796116498294985053\">https://x.com/nonfungiblesgn/status/1796116498294985053</a>",
+          "slug": "we-re-thrilled-to-announce-that-avalook-is-proudly-sponsoring-non-fungible-saigon-2024-the-ultimate"
+        },
+        {
+          "_id": "avalook-joined-hands-as-the-official-media-partner-of-gmvn-2024",
+          "status": "published",
+          "title": "Avalook joined hands as the official Media Partner of GMVN 2024.",
+          "cover": "/assets/img/5c4f61_9385fbc8802047d78c1f2fe657d27ad2~mv2.png",
+          "date": "Nov 28, 2024",
+          "readingTime": "1 min read",
+          "excerpt": "Avalook joined GMVN 2024 as the official Media Partner.",
+          "body": "Check out this post for more information: <a href=\"https://x.com/gmvn_official/status/1793582460560691344\">https://x.com/gmvn_official/status/1793582460560691344</a>",
+          "slug": "avalook-joined-hands-as-the-official-media-partner-of-gmvn-2024"
+        },
+        {
+          "_id": "get-ready-for-an-adorable-adventure-join-pudgy-penguin-friends-on-their-super-fun-and-exciting-asia",
+          "status": "published",
+          "title": "Get ready for an adorable adventure! Join Pudgy Penguin Friends on their super fun and exciting Asia tour!",
+          "cover": "/assets/img/5c4f61_e96039e8fcc240f69c4904dff1297ac8~mv2.png",
+          "date": "Nov 28, 2024",
+          "readingTime": "1 min read",
+          "excerpt": "Pudgy Penguins are on an Asia Tour, and Avalook joined as Creative Partner for the Pudgy Asia Art Contest.",
+          "body": "Have you heard? Pudgy Penguins are on an epic Asia Tour. Follow along to see where they're heading next.\n\nAs the Creative Partner for the Pudgy Asia Art Contest, Avalook collaborated with PunkgaMe and DeeDee Animation Studio on a special project featuring Pudgy Penguins.\n\nBig thanks to the hosts and partners: Dagora Marketplace, Pudgy Vietnam, Pudgy Asia and Aura Network. Head of Production: Quang Dang and Nhu Le. Supervising Producer: Trinh Nguy. Line Producer: Thu Le and Minh Anh Nguyen Pham.",
+          "slug": "get-ready-for-an-adorable-adventure-join-pudgy-penguin-friends-on-their-super-fun-and-exciting-asia"
+        }
+      ]
+    },
+    {
+      "id": "projects",
+      "name": "Projects",
+      "itemNoun": "Project",
+      "fields": [
+        {
+          "id": "title",
+          "name": "Title",
+          "type": "text",
+          "primary": true,
+          "required": true
+        },
+        {
+          "id": "type",
+          "name": "Type",
+          "type": "text"
+        },
+        {
+          "id": "image",
+          "name": "Image",
+          "type": "image"
+        },
+        {
+          "id": "accent",
+          "name": "Accent",
+          "type": "color"
+        },
+        {
+          "id": "href",
+          "name": "Link",
+          "type": "url"
+        }
+      ],
+      "items": [
+        {
+          "_id": "/projects/cat-22-and-atman/",
+          "status": "published",
+          "title": "CAT-22 and Atman",
+          "type": "Short Series",
+          "image": "/assets/img/5c4f61_d477edda700e4bc09c4b4cab46e9282f~mv2.png",
+          "accent": "#fff34a",
+          "href": "/projects/cat-22-and-atman/"
+        },
+        {
+          "_id": "/projects/pudgy-asia--art-contest/",
+          "status": "published",
+          "title": "Pudgy Asia Art Contest",
+          "type": "Promotion Video",
+          "image": "/assets/img/5c4f61_c1dd6dd686484ab2a049d90c4fb3a00cf000.jpg",
+          "accent": "#43dce8",
+          "href": "/projects/pudgy-asia--art-contest/"
+        },
+        {
+          "_id": "/projects/jelly's-bean/",
+          "status": "published",
+          "title": "Jelly's Bean",
+          "type": "Animation Series",
+          "image": "/assets/img/5c4f61_558ec87b267e442abbceb2aeb96a0b46f000.jpg",
+          "accent": "#f5d72d",
+          "href": "/projects/jelly's-bean/"
+        },
+        {
+          "_id": "/projects/do-you-want%3F--/",
+          "status": "published",
+          "title": "Do you want?",
+          "type": "Short Comic",
+          "image": "/assets/img/bia-doyouwant.png",
+          "accent": "#4285ff",
+          "href": "/projects/do-you-want%3F--/"
+        },
+        {
+          "_id": "/projects/the-chronicles-of--broken-being/",
+          "status": "published",
+          "title": "The Chronicles of Broken Being",
+          "type": "Book Series",
+          "image": "/assets/img/5c4f61_a52cef5a5b414a63ab0c52c3fc90f576~mv2.jpg",
+          "accent": "#ff8845",
+          "href": "/projects/the-chronicles-of--broken-being/"
+        },
+        {
+          "_id": "https://x.com/NotForThinking",
+          "status": "published",
+          "title": "Not For Thinking",
+          "type": "NFT Collection",
+          "image": "/assets/img/5c4f61_26a5bd2726a74f148293d54e203a4edbf000.jpg",
+          "accent": "#45c8ef",
+          "href": "https://x.com/NotForThinking"
+        },
+        {
+          "_id": "/projects/once-upon-her-time/",
+          "status": "published",
+          "title": "Hoang Thi The : Fate and Destiny",
+          "type": "Featured Film",
+          "image": "/assets/img/hoangthithe.jpg",
+          "accent": "#c8dfb2",
+          "href": "/projects/once-upon-her-time/"
+        }
+      ]
+    },
+    {
+      "id": "activities",
+      "name": "Activities",
+      "itemNoun": "Activity",
+      "fields": [
+        {
+          "id": "title",
+          "name": "Title",
+          "type": "text",
+          "primary": true
+        },
+        {
+          "id": "image",
+          "name": "Image",
+          "type": "image"
+        },
+        {
+          "id": "caption",
+          "name": "Caption",
+          "type": "text"
+        }
+      ],
+      "items": [
+        {
+          "_id": "activity-1",
+          "status": "published",
+          "title": "Activity 1",
+          "image": "/assets/img/5c4f61_36e7c9a95fbe41c2a486380555416a36~mv2.png",
+          "caption": ""
+        },
+        {
+          "_id": "activity-2",
+          "status": "published",
+          "title": "Activity 2",
+          "image": "/media/Activties/0001.jpg",
+          "caption": ""
+        },
+        {
+          "_id": "activity-3",
+          "status": "published",
+          "title": "Activity 3",
+          "image": "/media/Activties/00.jpg",
+          "caption": ""
+        },
+        {
+          "_id": "activity-4",
+          "status": "published",
+          "title": "Activity 4",
+          "image": "/media/Activties/000001.jfif",
+          "caption": ""
+        },
+        {
+          "_id": "activity-7",
+          "status": "published",
+          "title": "Activity 7",
+          "image": "/media/Activties/B8DB98E5-EAA1-4B11-9F76-0640B1CB15EA.jpg",
+          "caption": ""
+        },
+        {
+          "_id": "activity-8",
+          "status": "published",
+          "title": "Activity 8",
+          "image": "/media/Activties/IMG_4310.jpg",
+          "caption": ""
+        },
+        {
+          "_id": "activity-9",
+          "status": "published",
+          "title": "Activity 9",
+          "image": "/media/Activties/038BF0C5-4ECD-483F-BB2F-CB01EC2DCC95_edited.jpg",
+          "caption": ""
+        },
+        {
+          "_id": "activity-10",
+          "status": "published",
+          "title": "Activity 10",
+          "image": "/media/Activties/BDB42B77-28E0-4D79-A535-E315FEA57634.jpg",
+          "caption": ""
+        },
+        {
+          "_id": "activity-11",
+          "status": "published",
+          "title": "Activity 11",
+          "image": "/media/Activties/5EDA8DF9-1F12-49F3-9602-E060D27D858D.jpg",
+          "caption": ""
+        },
+        {
+          "_id": "activity-12",
+          "status": "published",
+          "title": "Activity 12",
+          "image": "/media/Activties/1%20(1).png",
+          "caption": ""
+        },
+        {
+          "_id": "activity-13",
+          "status": "published",
+          "title": "Activity 13",
+          "image": "/media/Activties/Screenshot_20.png",
+          "caption": ""
+        },
+        {
+          "_id": "activity-14",
+          "status": "published",
+          "title": "Activity 14",
+          "image": "/media/Activties/IMG_4998.jpg",
+          "caption": ""
+        },
+        {
+          "_id": "activity-15",
+          "status": "published",
+          "title": "Activity 15",
+          "image": "/media/Activties/DSC00391.jpg",
+          "caption": ""
+        },
+        {
+          "_id": "activity-16",
+          "status": "published",
+          "title": "Activity 16",
+          "image": "/media/Activties/Screenshot_1.png",
+          "caption": ""
+        },
+        {
+          "_id": "activity-17",
+          "status": "published",
+          "title": "Activity 17",
+          "image": "/media/Activties/1.jpg",
+          "caption": ""
+        },
+        {
+          "_id": "activity-18",
+          "status": "published",
+          "title": "Activity 18",
+          "image": "/media/Activties/365A4466-40F3-4AD0-8CF5-43585DCD0883.jpg",
+          "caption": ""
+        },
+        {
+          "_id": "activity-19",
+          "status": "published",
+          "title": "Activity 19",
+          "image": "/media/Activties/Screenshot_2.png",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "id": "team",
+      "name": "Team",
+      "itemNoun": "Member",
+      "fields": [
+        {
+          "id": "name",
+          "name": "Name",
+          "type": "text",
+          "primary": true,
+          "required": true
+        },
+        {
+          "id": "role",
+          "name": "Role",
+          "type": "text"
+        },
+        {
+          "id": "image",
+          "name": "Photo",
+          "type": "image"
+        },
+        {
+          "id": "group",
+          "name": "Group",
+          "type": "text",
+          "helpText": "Founder / Contributor / Advisor"
+        },
+        {
+          "id": "href",
+          "name": "Profile Link",
+          "type": "url"
+        }
+      ],
+      "items": [
+        {
+          "_id": "/profile/dang-hai-quang/",
+          "status": "published",
+          "name": "Dang Hai Quang",
+          "role": "Founder/ CEO",
+          "image": "/media/Founder/anhquang.avif",
+          "group": "Founder",
+          "href": "/profile/dang-hai-quang/"
+        },
+        {
+          "_id": "/profile/le-quynh-nhu/",
+          "status": "published",
+          "name": "Le Quynh Nhu",
+          "role": "Co-Founder/COO",
+          "image": "/media/Co-Founder/chinhu.avif",
+          "group": "Founder",
+          "href": "/profile/le-quynh-nhu/"
+        },
+        {
+          "_id": "team-2",
+          "status": "published",
+          "name": "Nguyen Hong Dung",
+          "role": "Marketing Specialist",
+          "image": "/media/Team/chidung.avif",
+          "group": "Contributor",
+          "href": "#team"
+        },
+        {
+          "_id": "team-3",
+          "status": "published",
+          "name": "Le Hoai Thu",
+          "role": "Project Assistant",
+          "image": "/media/Team/chithu.avif",
+          "group": "Contributor",
+          "href": "#team"
+        },
+        {
+          "_id": "team-4",
+          "status": "published",
+          "name": "Sylvain Grisollet",
+          "role": "Business Development Director",
+          "image": "/media/Team/anhtay.avif",
+          "group": "Contributor",
+          "href": "#team"
+        },
+        {
+          "_id": "/profile/ha-huy-hoang/",
+          "status": "published",
+          "name": "Ha Huy Hoang",
+          "role": "Creative Advisor",
+          "image": "/media/Creative%20Advisor/anhhoang.avif",
+          "group": "Advisor",
+          "href": "/profile/ha-huy-hoang/"
+        },
+        {
+          "_id": "/profile/nguyen-viet-hoa/",
+          "status": "published",
+          "name": "Nguyen Viet Hoa",
+          "role": "Business Advisor",
+          "image": "/media/Creative%20Advisor/anhhoa.avif",
+          "group": "Advisor",
+          "href": "/profile/nguyen-viet-hoa/"
+        },
+        {
+          "_id": "/profile/jason-vu-/",
+          "status": "published",
+          "name": "Jason Vu",
+          "role": "Strategy Advisor",
+          "image": "/media/Creative%20Advisor/anhvu.avif",
+          "group": "Advisor",
+          "href": "/profile/jason-vu-/"
+        }
+      ]
+    },
+    {
+      "id": "partners",
+      "name": "Partners",
+      "itemNoun": "Partner",
+      "fields": [
+        {
+          "id": "name",
+          "name": "Name",
+          "type": "text",
+          "primary": true,
+          "required": true
+        },
+        {
+          "id": "image",
+          "name": "Logo",
+          "type": "image"
+        }
+      ],
+      "items": [
+        {
+          "_id": "partner-0",
+          "status": "published",
+          "name": "DeeDee Animation Studio",
+          "image": "/assets/img/5c4f61_6bdb165f43284bef99d3d8d58bb89a1e~mv2.png"
+        },
+        {
+          "_id": "partner-1",
+          "status": "published",
+          "name": "Ninety Eight",
+          "image": "/assets/img/5c4f61_3e57a2e273f44ae29249c6860f5551b2~mv2.png"
+        },
+        {
+          "_id": "partner-2",
+          "status": "published",
+          "name": "Aura Network",
+          "image": "/assets/img/437529_5e0a2a01500140d6ac7f93c629a37027~mv2.png"
+        },
+        {
+          "_id": "partner-3",
+          "status": "published",
+          "name": "VEXA",
+          "image": "/assets/img/437529_067add392d9f433783e72cb3f0eb29bf~mv2.png"
+        },
+        {
+          "_id": "partner-4",
+          "status": "published",
+          "name": "PunkgaMe",
+          "image": "/assets/img/punkga-logo.avif"
+        },
+        {
+          "_id": "partner-5",
+          "status": "published",
+          "name": "Oseero",
+          "image": "/assets/img/5c4f61_be353565208c4b6fb68c44007900a716~mv2.png"
+        },
+        {
+          "_id": "partner-6",
+          "status": "published",
+          "name": "SeekHype",
+          "image": "/assets/img/437529_31ed4ea7749a46df8cd136408b0448d3~mv2.png"
+        }
+      ]
+    }
+  ],
+  "activeCollectionId": "activities"
 }
