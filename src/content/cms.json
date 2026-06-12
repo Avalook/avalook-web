@@ -166,13 +166,13 @@
           "href": "/projects/pudgy-asia--art-contest/"
         },
         {
-          "_id": "/projects/jelly's-bean/",
-          "status": "published",
           "title": "Jelly's Bean",
           "type": "Animation Series",
-          "image": "/assets/img/5c4f61_558ec87b267e442abbceb2aeb96a0b46f000.jpg",
+          "image": "https://jwghwkicvu8vyqls.public.blob.vercel-storage.com/jelly-4AqmqtypiNNFheWVwzpSPhNmbikMLm.mp4",
           "accent": "#f5d72d",
-          "href": "/projects/jelly's-bean/"
+          "href": "/projects/jelly's-bean/",
+          "_id": "/projects/jelly's-bean/",
+          "status": "published"
         },
         {
           "_id": "/projects/do-you-want%3F--/",
@@ -529,5 +529,5 @@
       ]
     }
   ],
-  "activeCollectionId": "blog-posts"
+  "activeCollectionId": "projects"
 }
