@@ -193,15 +193,6 @@
           "href": "/projects/the-chronicles-of--broken-being/"
         },
         {
-          "_id": "/projects/once-upon-her-time/",
-          "status": "published",
-          "title": "Hoang Thi The : Fate and Destiny",
-          "type": "Featured Film",
-          "image": "/assets/img/hoangthithe.jpg",
-          "accent": "#c8dfb2",
-          "href": "/projects/once-upon-her-time/"
-        },
-        {
           "_id": "https://x.com/NotForThinking",
           "status": "published",
           "title": "Not For Thinking",
@@ -209,6 +200,15 @@
           "image": "/assets/img/5c4f61_26a5bd2726a74f148293d54e203a4edbf000.jpg",
           "accent": "#45c8ef",
           "href": "https://x.com/NotForThinking"
+        },
+        {
+          "_id": "/projects/once-upon-her-time/",
+          "status": "published",
+          "title": "Hoang Thi The : Fate and Destiny",
+          "type": "Featured Film",
+          "image": "/assets/img/hoangthithe.jpg",
+          "accent": "#c8dfb2",
+          "href": "/projects/once-upon-her-time/"
         }
       ]
     },
@@ -529,5 +529,5 @@
       ]
     }
   ],
-  "activeCollectionId": "projects"
+  "activeCollectionId": "blog-posts"
 }
