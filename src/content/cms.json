@@ -90,15 +90,15 @@
           "slug": "we-re-thrilled-to-announce-that-avalook-is-proudly-sponsoring-non-fungible-saigon-2024-the-ultimate"
         },
         {
-          "_id": "avalook-joined-hands-as-the-official-media-partner-of-gmvn-2024",
-          "status": "published",
           "title": "Avalook joined hands as the official Media Partner of GMVN 2024.",
           "cover": "/assets/img/5c4f61_9385fbc8802047d78c1f2fe657d27ad2~mv2.png",
           "date": "Nov 28, 2024",
           "readingTime": "1 min read",
           "excerpt": "Avalook joined GMVN 2024 as the official Media Partner.",
-          "body": "Check out this post for more information: <a href=\"https://x.com/gmvn_official/status/1793582460560691344\">https://x.com/gmvn_official/status/1793582460560691344</a>",
-          "slug": "avalook-joined-hands-as-the-official-media-partner-of-gmvn-2024"
+          "body": "<p><em>Check out this post for more information: </em><a target=\"_blank\" rel=\"noopener\" href=\"https://x.com/gmvn_official/status/1793582460560691344\">https://x.com/gmvn_official/status/1793582460560691344</a></p>",
+          "slug": "avalook-joined-hands-as-the-official-media-partner-of-gmvn-2024",
+          "_id": "avalook-joined-hands-as-the-official-media-partner-of-gmvn-2024",
+          "status": "published"
         },
         {
           "_id": "get-ready-for-an-adorable-adventure-join-pudgy-penguin-friends-on-their-super-fun-and-exciting-asia",
@@ -529,5 +529,5 @@
       ]
     }
   ],
-  "activeCollectionId": "activities"
+  "activeCollectionId": "blog-posts"
 }
