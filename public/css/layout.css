@@ -1,0 +1,476 @@
+/* ============================================================
+ * layout.css — Container, grid & section spacing
+ * ============================================================ */
+
+main,
+.follow-strip,
+.site-footer {
+  width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* ---------- Header ----------
+ * FULL-WIDTH bar pinned to top edge of viewport (no horizontal/vertical gaps).
+ * Inner content is centered via padding-inline so the bar's gradient/blur
+ * extends edge-to-edge while logo/nav stay aligned with the rest of the page.
+ */
+.site-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  width: 100%;
+  margin: 0;
+  padding: 16px max(24px, calc((100vw - var(--max-width)) / 2));
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+  background: transparent;
+  backdrop-filter: none;
+}
+
+body.detail-page .site-header,
+body.profile-detail-page .site-header,
+body.post-page .site-header,
+body.recruitment-page .site-header,
+body.static-page .site-header {
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.brand img {
+  width: clamp(160px, 15vw, 230px);
+  height: auto;
+}
+
+.footer-logo {
+  width: clamp(140px, 13vw, 200px);
+  height: auto;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: clamp(10px, 1.4vw, 28px);
+  min-width: 0;
+  font-size: 1.125rem;
+}
+
+/* ---------- Hero section frame ---------- */
+.hero,
+.section {
+  position: relative;
+}
+
+/* Hero section breaks out of `main`'s max-width constraint.
+ * Wix uses a full-bleed hero — slide images stretch edge-to-edge under
+ * the header with NO gap. Negative-margin breakout lets hero ignore main's
+ * centered max-width and span 100vw. */
+.hero {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 0;                   /* zero gap top + bottom — sections touch */
+}
+
+.hero-frame {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 2850 / 1582;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+  /* Fade the top of the hero into the page background so the area behind
+   * the (transparent) header shows the same dark gradient as sub-pages. */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, transparent 56px, #000 140px, #000 100%);
+          mask-image: linear-gradient(180deg, transparent 0, transparent 56px, #000 140px, #000 100%);
+  /* Container query scope — hero text/button inside use `cqw` so they
+   * always stay an EXACT % of the frame's width, never break ratio. */
+  container-type: inline-size;
+  container-name: hero;
+}
+
+/* Hero slider dots are removed — sections must sit flush, no decorative
+ * dot row in between. The slider buttons (prev/next arrows) still work
+ * for manual control. */
+.hero-dots {
+  display: none !important;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.hero-copy {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  /* All positions are pure % of the hero frame (which has fixed
+   * aspect-ratio 2850/1582). When viewport scales, the frame scales
+   * proportionally, so title + button move with the image as one unit. */
+  --hero-content-left: 12%;    /* title +5% right (was 7%) */
+  --hero-title-top: 34%;
+  --hero-title-width: 74%;
+  --hero-button-left: 12%;     /* button shifted -10% from previous 22% */
+  --hero-button-top: 72%;
+  width: auto;
+  max-width: none;
+  padding: 0;
+  pointer-events: none;
+}
+
+.hero-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ---------- Generic section spacing ──────────
+ * NOTE: zero top padding — the Wix-exported PNG backdrops are designed
+ * to butt up directly against each other so the page reads as one
+ * continuous tapestry of imagery. Internal spacing comes from each
+ * section's own padding (set in section-backgrounds.css per section). */
+.section {
+  padding: 0;
+  /* Anchor-jump offset is handled globally by `scroll-padding-top` on <html>
+   * (driven by the live --header-h variable), so no per-section magic number
+   * is needed here — keeping one avoids double-offsetting the scroll target. */
+}
+
+.section-heading {
+  margin-bottom: 28px;
+}
+
+.subsection {
+  padding-top: 34px;
+}
+
+/* ---------- Section grids ---------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 44px;
+  align-items: center;
+}
+
+.who-we-are-grid {
+  min-height: clamp(420px, 30vw, 580px);
+  grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
+  gap: clamp(48px, 7vw, 140px);
+  align-items: start;
+}
+
+.portfolio-grid,
+.logo-grid,
+.announcement-grid,
+.people-grid,
+.contributor-grid,
+.achievement-grid {
+  display: grid;
+  gap: 20px;
+}
+
+/* ────────────────────────────────────────────────────────────
+ * FIXED-COLUMN grids — column count never changes on desktop.
+ * Cards SHRINK proportionally as viewport narrows instead of
+ * reflowing to fewer columns (preserves visual structure).
+ * Only the mobile breakpoint (≤780px) collapses to 1 column.
+ * ──────────────────────────────────────────────────────────── */
+
+.portfolio-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));   /* always 2 cols */
+  gap: clamp(16px, 1.6vw, 28px);
+}
+
+/* Logo grid: 7 logos in one fixed row, gap is a percentage of viewport
+ * so spacing scales with logos. minmax(0,1fr) lets each logo column
+ * shrink below intrinsic content width so they NEVER overflow/overlap. */
+.logo-grid {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  align-items: center;
+  gap: clamp(8px, 1.2vw, 24px);
+}
+
+/* Founders take MORE width per card (just 2 of them across same total
+ * row width as the contributors row that has 3 cards) — naturally
+ * appears larger / more prominent. */
+.founders-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 2.4vw, 40px);
+  /* Cap row width slightly so each founder card isn't TOO wide on
+   * very large screens — keeps them readable. */
+  max-width: 100%;
+}
+
+/* Contributors row — 3 cards below founders. Slightly smaller cards
+ * than founders, so the 2 CEO/COO cards stand out as larger. */
+.contributors-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 32px);
+  margin-top: clamp(20px, 2.4vw, 40px);
+}
+
+.advisors-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));   /* always 3 advisors */
+  gap: clamp(16px, 2vw, 32px);
+}
+
+.contributor-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));   /* always 4 contributors */
+  gap: clamp(12px, 1.4vw, 22px);
+}
+
+.achievement-grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  align-items: center;
+}
+
+.achievement-grid-featured {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(20px, 1.8vw, 28px);
+}
+
+.achievement-grid-compact {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: clamp(18px, 1.5vw, 24px);
+  margin-top: clamp(26px, 3vw, 42px);
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 1.5vw, 24px);
+}
+
+.announcement-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* ---------- Follow strip + footer ---------- */
+.follow-strip {
+  padding: 90px 0 26px;
+}
+
+.follow-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+/* ── Footer ── 3-col layout: brand | nav | CTA + socials ── */
+.site-footer {
+  padding: clamp(48px, 5vw, 96px) 0 clamp(28px, 3vw, 56px);
+}
+
+.footer-grid {
+  display: grid;
+  /* Brand takes more left space; nav + CTA shift toward the RIGHT
+   * for visual balance (logo on far left, contact stuff on far right). */
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(40px, 5vw, 120px);
+  align-items: start;
+}
+
+/* Nav + CTA align to the right so they hug the right edge */
+.footer-nav {
+  justify-self: end;
+  text-align: left;
+  transform: translateX(5%);
+}
+
+.footer-cta {
+  justify-self: end;
+  width: auto;
+  min-width: clamp(220px, 16vw, 280px);
+  transform: translateX(5%);
+}
+
+/* Left column — logo + copyright */
+.footer-brand {
+  display: grid;
+  gap: clamp(40px, 6vw, 80px);    /* push copyright to bottom of column */
+}
+
+.footer-logo-link {
+  display: inline-flex;
+  width: fit-content;
+}
+
+.footer-copyright {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.92rem;
+}
+
+/* Middle column — vertical nav links, underlined */
+.footer-nav {
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+}
+
+.footer-nav a {
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1px;
+  transition: color 200ms ease;
+}
+
+.footer-nav a:hover,
+.footer-nav a:focus-visible {
+  color: var(--color-primary);
+  outline: none;
+}
+
+/* Right column — Get in touch heading + Contact pill + social icons */
+.footer-cta {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+  width: 100%;
+}
+
+.footer-cta-title {
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: clamp(1.4rem, 1.8vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Pull contact button + socials to fill the column fully on the right */
+.footer-contact-btn {
+  align-self: stretch;
+  text-align: center;
+  width: auto;
+  min-width: clamp(140px, 12vw, 200px);
+}
+
+.footer-cta .footer-social {
+  margin-top: 6px;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+@media (max-width: 880px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+  .footer-brand {
+    gap: 18px;
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 520px) {
+  /* TWO columns on phones: the brand (logo + copyright) spans the top, then
+   * the footer nav (left) and the Get-in-touch / Contact / socials block
+   * (right) sit side by side — fills the previously empty right half. */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 18px;
+    row-gap: 30px;
+    align-items: start;
+  }
+  .footer-brand {
+    grid-column: 1 / -1;
+    gap: 16px;
+  }
+  .footer-nav,
+  .footer-cta {
+    justify-self: start;
+    transform: none;
+    min-width: 0;
+  }
+  .footer-nav {
+    justify-items: start;
+  }
+  /* CTA fills its (right) column; the Contact button stretches to match. */
+  .footer-cta {
+    width: 100%;
+  }
+  .footer-contact-btn {
+    min-width: 0;
+  }
+}
+
+/* ---------- Detail pages ---------- */
+.page-hero,
+.detail-hero,
+.profile-detail,
+.post-layout {
+  padding-top: 92px;
+}
+
+.compact-hero {
+  min-height: 380px;
+  display: grid;
+  align-content: end;
+  padding-bottom: 42px;
+  border-bottom: 1px solid var(--line);
+}
+
+.detail-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 34px;
+  align-items: end;
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 42px;
+  align-items: start;
+}
+
+.detail-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(20px, 2.4vw, 34px);
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+/* Blog post: one centred column — meta, title, cover, body, share, recent
+   posts and comments all share the same width and left edge. */
+.post-layout {
+  width: min(820px, calc(100vw - 40px));
+  margin: 0 auto;
+}
+
+.post-body {
+  margin: 26px 0 0;
+}
+
+.profile-detail-grid {
+  min-height: min(680px, calc(100vh - 180px));
+  display: grid;
+  grid-template-columns: minmax(280px, 430px) minmax(0, 1fr);
+  gap: 42px;
+  align-items: center;
+}
+
+.simple-page main {
+  min-height: 52vh;
+}

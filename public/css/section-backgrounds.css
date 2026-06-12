@@ -1,0 +1,152 @@
+/* ============================================================
+ * section-backgrounds.css
+ *
+ * Single full-page Avalook backdrop: deep cosmic navy with
+ * neon teal + magenta auras. Applied once on <body>; section
+ * backgrounds are kept transparent so the gradient flows
+ * uninterrupted from header to footer.
+ * ============================================================ */
+
+/* ── Page-wide background ──────────────────────────────────
+ * A single ambient backdrop painted on a TRUE fixed layer
+ * (body::before, position: fixed) instead of
+ * `background-attachment: fixed`. A fixed-position element is
+ * rendered against the viewport reliably on every device — it
+ * avoids the well-known iOS/Android repaint bugs and the
+ * full-page "banding" that `background-attachment: fixed`
+ * causes, so the glow stays identical at every scroll position
+ * and on every breakpoint. Lives on <body> so it applies to the
+ * home page AND every sub-page uniformly. */
+body {
+  background-color: #05060f;
+  color: #e7ecff;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  /* Calmer, more even palette than before — lower aura opacity so
+   * the page reads as one cohesive cosmic backdrop rather than
+   * separate coloured zones. */
+  background-color: #05060f;
+  background-image:
+    /* neon teal aura, top */
+    radial-gradient(ellipse 85% 50% at 14% 0%, rgba(45, 212, 191, 0.20), transparent 60%),
+    /* magenta/violet aura, upper-right */
+    radial-gradient(ellipse 75% 55% at 96% 26%, rgba(168, 85, 247, 0.15), transparent 62%),
+    /* cyan glow, lower-left */
+    radial-gradient(ellipse 70% 50% at 0% 76%, rgba(34, 211, 238, 0.13), transparent 60%),
+    /* warm accent, bottom-right */
+    radial-gradient(ellipse 60% 45% at 100% 100%, rgba(244, 114, 182, 0.11), transparent 62%),
+    /* base vertical gradient — gentle top→bottom darkening */
+    linear-gradient(180deg, #070a1c 0%, #0a1028 30%, #0b1230 60%, #070c20 82%, #04060f 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Neutralize the legacy .page-bg overlay so it doesn't tint the new bg */
+.page-bg {
+  background: transparent !important;
+}
+
+/* ── Full-bleed breakout (sections escape `main` max-width) ─── */
+.full-bleed {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* All sections that previously had Wix backdrops — keep the
+ * full-bleed layout + spacing, but drop the background image so
+ * the body gradient shows through. */
+.who-we-are-section,
+.portfolio,
+.partners,
+.activities,
+.subsection.advisors-section,
+.subsection.achievements-section {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  background: transparent;
+  padding-top: clamp(48px, 5vw, 96px);
+  padding-bottom: clamp(48px, 5vw, 96px);
+  padding-left: max(24px, calc((100vw - var(--max-width)) / 2));
+  padding-right: max(24px, calc((100vw - var(--max-width)) / 2));
+  box-sizing: border-box;
+}
+
+.team {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  /* Top breathing space lives on the SECTION (above the #team heading
+   * anchor target) so an anchor jump lands the heading at the same offset
+   * as every other section, instead of an extra ~24px lower. */
+  padding-top: clamp(18px, 1.6vw, 30px);
+  padding-left: max(24px, calc((100vw - var(--max-width)) / 2));
+  padding-right: max(24px, calc((100vw - var(--max-width)) / 2));
+  box-sizing: border-box;
+  background: transparent;
+}
+
+.team .founders-grid {
+  background: transparent;
+  padding: 0;
+}
+
+.partners {
+  padding-top: clamp(24px, 2.5vw, 48px);
+}
+
+/* ── Header: fully transparent on every page so it blends into the bg ─── */
+.site-header {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: none !important;
+}
+
+
+/* ── Footer: melts into the page — NO hard separator line, NO black block.
+ *    The top is fully transparent so the ambient backdrop flows straight
+ *    through, then a long, gentle deepening gives the page a soft "floor"
+ *    without ever going pitch-black. ── */
+.site-footer {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(6, 8, 18, 0.30) 42%,
+    rgba(4, 6, 15, 0.78) 100%
+  );
+  border-top: none;
+  padding-left: max(24px, calc((100vw - var(--max-width)) / 2));
+  padding-right: max(24px, calc((100vw - var(--max-width)) / 2));
+  box-sizing: border-box;
+  min-height: clamp(220px, 19vw, 380px);
+}
+
+/* Subsections inside .team — keep transparent so gradient flows */
+.subsection.advisors-section,
+.subsection.achievements-section {
+  background: transparent;
+}
+
+/* Guarantee header stays fully transparent in every scroll state — no
+ * .is-scrolled / .scrolled / data-scrolled background flip. */
+.site-header,
+.site-header.is-scrolled,
+.site-header.scrolled,
+.site-header[data-scrolled="true"] {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
+}

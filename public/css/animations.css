@@ -1,0 +1,141 @@
+/* ============================================================
+ * animations.css — Transitions, keyframes, hover effects
+ * ============================================================ */
+
+/* ---------- Hero slide cross-fade ---------- */
+.hero-slide {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 400ms ease;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ---------- Mobile menu fade in/out ---------- */
+.nav-toggle span {
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+/* ---------- Marquee ---------- */
+.marquee-track {
+  animation: marquee 22s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.333%); }
+}
+
+/* ---------- Card hover ---------- */
+.portfolio-card,
+.announcement-card,
+.advisor-card,
+.person-card,
+.mini-card,
+.blog-card {
+  transition: transform 280ms ease, box-shadow 280ms ease, border-color 280ms ease;
+}
+
+.portfolio-card:hover,
+.announcement-card:hover,
+.advisor-card:hover,
+.person-card:hover,
+.mini-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(137, 235, 207, 0.35);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 0 1px rgba(137, 235, 207, 0.18);
+}
+
+/* ---------- Buttons hover ---------- */
+.ghost-button,
+.contact-pill,
+.load-more,
+.follow-buttons a {
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    transform 160ms ease,
+    border-color 200ms ease;
+}
+
+.ghost-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: white;
+}
+
+/* Contact us pill — invert on hover (mint bg + dark text → dark bg + mint text). */
+.contact-pill:hover {
+  background: #171717;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.follow-buttons a:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.load-more:hover {
+  background: #fff;
+  color: #0a0d0f;
+  border-color: #fff;
+}
+
+/* ---------- Hero arrows hover ---------- */
+.hero-arrow {
+  transition: transform 200ms ease, color 200ms ease;
+}
+
+.hero-arrow:hover {
+  color: var(--color-primary);
+  transform: translateY(-50%) scale(1.08);
+}
+
+/* ---------- Hero dot ---------- */
+.hero-dot {
+  transition: background-color 200ms ease, transform 200ms ease;
+}
+
+.hero-dot:hover {
+  transform: scale(1.2);
+}
+
+/* ---------- Image-in-card subtle zoom on hover (portfolio EXCLUDED — static) ---------- */
+.announcement-card img,
+.advisor-card img,
+.blog-card img,
+.person-card img {
+  transition: transform 500ms ease;
+}
+
+.announcement-card:hover img,
+.blog-card:hover img {
+  transform: scale(1.04);
+}
+
+/* ---------- Site nav link hover ---------- */
+.site-nav a {
+  transition: color 200ms ease;
+}
+
+.site-nav a:hover {
+  color: var(--color-primary);
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  .marquee-track {
+    animation: none !important;
+  }
+}

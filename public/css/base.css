@@ -1,0 +1,144 @@
+/* ============================================================
+ * base.css — Reset, design tokens (CSS variables), typography
+ * Used by: home + tất cả sub-pages + dashboard (sau này)
+ * ============================================================ */
+
+/* ---------- Design tokens ---------- */
+:root {
+  /* Surface / background */
+  --bg: #000;
+  --panel: #040607;
+  --panel-soft: #0b1112;
+
+  /* Text */
+  --text: #fff;
+  --muted: rgba(255, 255, 255, 0.75);
+  --line: rgba(255, 255, 255, 0.14);
+
+  /* Brand accent (giữ nguyên hệ teal/mint của Avalook) */
+  --color-primary: #89ebcf;     /* mint — alias --mint */
+  --color-secondary: #60d8ff;   /* teal — alias --teal */
+  --color-accent: #4bf1c6;      /* hero highlight color */
+  --color-warning: #f0df52;     /* yellow — alias --yellow */
+  --menu-green: #005c49;
+
+  /* Backwards-compat alias (legacy code) */
+  --mint: var(--color-primary);
+  --teal: var(--color-secondary);
+  --yellow: var(--color-warning);
+
+  /* Typography stacks */
+  --font-display: "KNOB", "Avalook Knob", "SVN Mission X", sans-serif;
+  --font-heading: "KNOB", "Avalook Knob", "SVN Mission X", sans-serif;
+  --font-body: "SF Pro Text", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing (8px grid) */
+  --spacing-unit: 8px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ── Fluid spacing tokens (Canva-style scaling) ──────────────
+   * Use these instead of hard-coded px when an element should
+   * scale proportionally with viewport width. */
+  --space-fluid-xs: clamp(4px, 0.5vw, 8px);
+  --space-fluid-sm: clamp(8px, 1vw, 16px);
+  --space-fluid-md: clamp(14px, 1.6vw, 24px);
+  --space-fluid-lg: clamp(20px, 2.4vw, 40px);
+  --space-fluid-xl: clamp(32px, 4vw, 64px);
+
+  /* Fluid font tokens — for headings/buttons that should breathe with viewport. */
+  --font-fluid-sm:  clamp(11px, 1vw, 14px);
+  --font-fluid-md:  clamp(14px, 1.4vw, 18px);
+  --font-fluid-lg:  clamp(18px, 2vw, 28px);
+  --font-fluid-xl:  clamp(28px, 3.5vw, 56px);
+  --font-fluid-2xl: clamp(42px, 5vw, 84px);
+
+  /* Radii */
+  --border-radius: 16px;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 16px 32px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 32px 60px rgba(0, 0, 0, 0.45);
+  --shadow: var(--shadow-lg); /* legacy alias */
+
+  /* Layout */
+  /* Layout width is a PROPORTION of viewport (90vw = 5% margin each side),
+   * capped at 1760px so on very wide screens content doesn't get stretched
+   * absurdly. Margins always scale with the viewport instead of staying a
+   * fixed 24px slab. */
+  --max-width: min(1760px, 90vw);
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  /* Offset in-page anchor jumps by the (sticky, transparent) header height
+   * so a clicked nav link lands the section heading just below the header
+   * instead of underneath it. --header-h is measured live in JS
+   * (SiteHeader) and updated on resize; 64px is a safe SSR/first-paint
+   * fallback. The small +14px adds consistent breathing room. */
+  scroll-padding-top: calc(var(--header-h, 64px) + 14px);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1.125rem; /* ~18px base size */
+  background: var(--bg);
+
+  /* Font rendering — quan trọng để KNOB và SF Pro hiển thị đúng */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  /* Cấm browser tự synthesize bold/italic — KNOB chỉ có weight 400.
+     Nếu không tắt, h1/h2 default 700 sẽ bị tô đậm giả. */
+  font-synthesis: none;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---------- Page background (radial glow + dark gradient) ---------- */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 12%, rgba(96, 216, 255, 0.22), transparent 25%),
+    radial-gradient(circle at 22% 33%, rgba(74, 255, 196, 0.12), transparent 22%),
+    linear-gradient(180deg, #000 0%, #020505 40%, #000 100%);
+  pointer-events: none;
+  z-index: -2;
+}

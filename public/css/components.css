@@ -1,0 +1,2122 @@
+/* ============================================================
+ * components.css — Header nav, buttons, cards, hero slide,
+ *                  marquee, typography rules per component
+ * ============================================================ */
+
+/* ---------- Site nav links ---------- */
+.site-nav a {
+  font-size: clamp(0.95rem, 1.1vw, 1.2rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.92);
+  white-space: nowrap;
+}
+
+/* ---------- Contact pill (CTA in header) ---------- */
+.contact-pill {
+  padding: 10px 22px;
+  border-radius: 18px;
+  background: var(--color-primary);
+  color: #171717;
+  font-size: clamp(0.86rem, 0.95vw, 1.05rem);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ---------- Mobile nav toggle (hamburger) ----------
+ * Bars use the brand green and gain a glow effect on hover / when open. */
+.nav-toggle {
+  display: none;
+  justify-self: end;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 240ms ease, filter 240ms ease;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 30px;
+  height: 5px;
+  margin: 4px auto;
+  border-radius: 2px;
+  background: var(--menu-green);
+  transition:
+    background-color 240ms ease,
+    transform 280ms cubic-bezier(0.65, 0, 0.35, 1),
+    box-shadow 240ms ease,
+    opacity 240ms ease;
+}
+
+/* Hover: bars brighten to mint with a soft glow + subtle bounce */
+.nav-toggle:hover,
+.nav-toggle:focus-visible {
+  filter: drop-shadow(0 0 6px rgba(137, 235, 207, 0.55));
+  outline: none;
+}
+
+.nav-toggle:hover span,
+.nav-toggle:focus-visible span {
+  background: var(--color-primary);
+  box-shadow: 0 0 12px rgba(137, 235, 207, 0.7);
+}
+
+/* Active press: tiny scale-down feedback */
+.nav-toggle:active {
+  transform: scale(0.94);
+}
+
+/* When the menu is OPEN: bars glow brighter + animate into X */
+body.menu-open .nav-toggle {
+  filter: drop-shadow(0 0 10px rgba(137, 235, 207, 0.8));
+}
+
+body.menu-open .nav-toggle span {
+  background: var(--color-primary);
+  box-shadow: 0 0 14px rgba(137, 235, 207, 0.9);
+}
+
+/* ============================================================
+ * HERO COMPONENT
+ * ============================================================ */
+
+.hero-slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 18%, rgba(0, 0, 0, 0.08) 36%, rgba(0, 0, 0, 0.2) 100%),
+    var(--hero-image) center center / cover no-repeat;
+}
+
+.hero-slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.18), transparent 45%),
+    radial-gradient(circle at 30% 85%, rgba(128, 255, 230, 0.12), transparent 26%);
+}
+
+/* Hero h1 — KNOB display font.
+ * Font scales with FRAME width via cqw, but `clamp()` enforces:
+ *   MIN 24px → readable on mobile (when 5.2cqw would be ~19px)
+ *   MAX 90px → doesn't get absurdly large on huge displays
+ * Between MIN and MAX, font is exactly 5.2% of frame → proportional. */
+.hero-copy h1 {
+  position: absolute;
+  left: var(--hero-content-left);
+  top: var(--hero-title-top);
+  width: var(--hero-title-width);
+  max-width: var(--hero-title-width);
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(24px, 5.2cqw, 90px);
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: clamp(0.5px, 0.05cqw, 3px);
+}
+
+.hero-copy span {
+  color: var(--color-accent);
+}
+
+/* Ghost / outline button (Hero CTA) */
+.ghost-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 68px;
+  padding: 0 28px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
+  font-size: 1rem;
+  backdrop-filter: blur(4px);
+}
+
+.hero-copy .ghost-button {
+  position: absolute;
+  left: var(--hero-button-left, var(--hero-content-left));
+  top: var(--hero-button-top);
+  min-height: auto;
+  margin-top: 0;
+  /* Padding + font-size scale with frame via cqw — same rate as desktop.
+   * Floors are intentionally LOW so on narrow phone frames the button
+   * shrinks proportionally to the title (matching the desktop button-to-
+   * title ratio of ~4.7:1) instead of getting stuck at a chunky min size. */
+  padding: clamp(4px, 0.85cqw, 16px) clamp(8px, 1.7cqw, 28px);
+  border-color: rgba(255, 255, 255, 0.9);
+  border-radius: clamp(4px, 1cqw, 18px);
+  background: rgba(0, 0, 0, 0.18);
+  color: #fff;
+  font-size: clamp(7px, 1.1cqw, 20px);
+  line-height: 1;
+  backdrop-filter: blur(8px);
+  pointer-events: auto;
+}
+
+/* Hero arrows */
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  width: 44px;
+  height: 56px;
+  margin-top: 10px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.hero-arrow span {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.9rem;
+  font-weight: 300;
+  line-height: 1;
+  margin-top: 0;
+}
+
+.hero-arrow-prev { left: 1%; }   /* shifted further left (~10% from default 18px) */
+.hero-arrow-next { right: 18px; }
+
+/* Hero dots */
+.hero-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
+.hero-dot.is-active {
+  background: var(--color-primary);
+}
+
+/* Hero ambient glows */
+.hero-aura,
+.planet {
+  position: absolute;
+  pointer-events: none;
+}
+
+.hero-aura {
+  filter: blur(60px);
+  opacity: 0.65;
+}
+
+.hero-aura-left {
+  left: 6%;
+  top: 34%;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(70, 221, 253, 0.3);
+}
+
+.hero-aura-right {
+  right: 4%;
+  top: 20%;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: rgba(70, 221, 253, 0.18);
+}
+
+.planet {
+  top: 148px;
+  right: 20px;
+  width: 134px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 34%, rgba(133, 240, 255, 0.46), transparent 32%),
+    linear-gradient(135deg, rgba(45, 74, 84, 0.15), rgba(111, 206, 227, 0.5));
+  box-shadow: inset -26px -26px 50px rgba(0, 0, 0, 0.58);
+}
+
+/* ============================================================
+ * SECTION HEADINGS
+ * ============================================================ */
+
+.section-heading p {
+  margin: 0 0 14px;
+  color: var(--color-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* All section headings + subheadings share ONE font-size formula so
+ * PORTFOLIO, OUR PARTNERS, MEET THE TEAM, ADVISORS, FOUNDER ACHIEVEMENTS,
+ * LATEST ANNOUNCEMENTS, CORE CONTRIBUTORS render at exactly the same size.
+ * No per-section overrides. */
+.section-heading h2,
+.subheading {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 2.4vw, 2.6rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.subheading {
+  margin-bottom: 18px;
+}
+
+/* ============================================================
+ * ABOUT
+ * ============================================================ */
+
+.about-copy {
+  display: grid;
+  gap: 18px;
+}
+
+.about-copy p {
+  margin: 0;
+  max-width: 68ch;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.about-art img {
+  width: 100%;
+}
+
+.who-we-are-section {
+  padding-top: clamp(64px, 5vw, 110px);
+  padding-bottom: clamp(44px, 4vw, 80px);
+}
+
+.who-we-are-mark {
+  align-self: start;
+  padding-top: clamp(44px, 3.4vw, 72px);
+}
+
+.who-we-are-mark img {
+  width: min(460px, 100%);
+  filter:
+    drop-shadow(0 18px 28px rgba(71, 242, 196, 0.22))
+    drop-shadow(0 0 38px rgba(71, 242, 196, 0.28));
+}
+
+.who-we-are-copy {
+  gap: 0;
+}
+
+.who-we-are-copy p {
+  max-width: 920px;
+  color: rgba(255, 255, 255, 0.96);
+  font-size: clamp(1.45rem, 2.05vw, 2.35rem);
+  line-height: 1.16;
+}
+
+/* ============================================================
+ * CARDS (portfolio / announcement / person / mini / text / blog)
+ * ============================================================ */
+
+.portfolio-card,
+.announcement-card,
+.person-card,
+.mini-card,
+.text-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: linear-gradient(180deg, rgba(12, 17, 18, 0.95), rgba(7, 10, 11, 0.95));
+  box-shadow: var(--shadow-lg);
+}
+
+.portfolio-card img,
+.portfolio-card video,
+.announcement-card img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.portfolio-card div,
+.announcement-card div,
+.person-card div,
+.mini-card,
+.text-card {
+  padding: 18px 20px 22px;
+}
+
+.portfolio-card h3,
+.announcement-card h3,
+.person-card h3,
+.mini-card strong,
+.text-card strong {
+  margin: 0;
+  font-size: 1.25rem; /* ~20px */
+  line-height: 1.4;
+}
+
+.portfolio-card span,
+.announcement-card p,
+.person-card small,
+.mini-card small,
+.text-card small {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.portfolio-card > a,
+.announcement-card > a,
+.person-card > a,
+.mini-card > a {
+  display: block;
+  height: 100%;
+  margin-top: 0;
+}
+
+.person-card span,
+.mini-card a::after {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.mini-card a::after {
+  content: "Read more";
+  font-size: 0.94rem;
+}
+
+/* ============================================================
+ * PORTFOLIO CARD — cinematic horizontal card (Canva-style scaling)
+ *
+ * Structure:
+ *   <article.portfolio-card style="--accent:#xxx">
+ *     <a>
+ *       <img />
+ *       <div.portfolio-footer>
+ *         <h3>Title</h3>
+ *         <span>Genre</span>
+ *       </div>
+ *     </a>
+ *   </article>
+ *
+ * Layout: image fills top, the .portfolio-footer is a real wrapper
+ * sitting at the bottom — the white border is on this wrapper directly
+ * (NOT a pseudo-element), so the stroke is one geometric line that
+ * wraps the band edge-to-edge and curves with the card.
+ *
+ * Sizing scales by the CARD's own width (container query) — not viewport.
+ * Place this card in a 600px column or a 400px column and it self-adjusts.
+ * No 1180px / 780px viewport overrides needed.
+ *
+ * Hover behavior (independent per element):
+ *   Title hover : color  --accent → #fff
+ *   Badge hover : bg     --accent → #000, color #000 → --accent
+ * ============================================================ */
+
+.portfolio-card {
+  --accent: var(--color-primary);
+  --card-radius: 16px;
+  --footer-h: 30%;
+
+  /* Container query scope: child elements respond to THIS card's width. */
+  container-type: inline-size;
+  container-name: pcard;
+
+  position: relative;
+  aspect-ratio: 1140 / 765;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: var(--card-radius);
+  background: #000;
+  box-shadow: var(--shadow-lg);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.portfolio-card > a {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  margin-top: 0;
+  text-decoration: none;
+}
+
+/* Media fills row 1 fully — no transition/transform on hover.
+ * Top corners rounded (matching card) since card no longer clips. */
+.portfolio-card img,
+.portfolio-card video {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  align-self: stretch;
+  margin: 0;
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+  aspect-ratio: auto;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  transition: none !important;
+  transform: none !important;
+}
+
+.portfolio-card:hover img,
+.portfolio-card:hover video,
+.portfolio-card:focus-within img,
+.portfolio-card:focus-within video {
+  transform: none !important;
+}
+
+/* ── Footer wrapper ─────────────────────────────────────── */
+.portfolio-card .portfolio-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  height: clamp(64px, 9cqi, 110px);
+  column-gap: clamp(10px, 2cqi, 22px);
+  padding: 0 clamp(14px, 3cqi, 28px);
+  background: #000;
+  border: 0;
+  border-radius: 0 0 var(--card-radius) var(--card-radius);
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure h3 and span vertically center as inline-flex items —
+ * remove any inherited margin/baseline offset that could push them off-center. */
+.portfolio-card .portfolio-footer h3 {
+  margin: 0;
+  align-self: center;
+  display: block;
+  min-width: 0;
+}
+
+.portfolio-card .portfolio-footer span {
+  margin: 0;
+  align-self: center;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Title (h3, left) ──────────────────────────────────── */
+.portfolio-card h3 {
+  margin: 0;
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 10cqi, 64px);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  text-align: left;
+  /* Title always stays on ONE line. useFitOneLine (JS) shrinks the font so the
+   * full text fits beside the badge on every viewport — overflow:hidden only
+   * guards the brief pre-script frame. */
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  transition: color 180ms ease;
+}
+
+/* ── Badge (span, right pill) ──────────────────────────── */
+.portfolio-card span {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(6px, 1.4cqi, 10px) clamp(10px, 2.6cqi, 20px);
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  background: var(--accent);
+  color: #000;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(13px, 2.6cqi, 19px); /* Tăng cỡ chữ badge theo yêu cầu */
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+/* ── Independent hovers ──────────────────────────────────
+ * Hover on title only changes title; hover on badge only changes badge.
+ * Hover on image area leaves both at rest. */
+.portfolio-card h3:hover,
+.portfolio-card h3:focus-visible {
+  color: #fff;
+}
+
+.portfolio-card span:hover,
+.portfolio-card span:focus-visible {
+  background: #000;
+  color: var(--accent);
+}
+
+/* ── Container queries: graceful adaptation by card width ───
+ * Tighten things up when the card itself becomes narrow.
+ * Medium cards (~360-540px wide) need slightly smaller title
+ * so 30+ char titles still fit beside the badge. */
+/* Medium and narrow cards (≤ 700px) — covers most realistic
+ * portfolio card sizes. Title scales ~3.7cqi but capped at 22px
+ * so even 32-char titles ("Hoang Thi The : Fate and Destiny") fit
+ * beside the badge. */
+@container pcard (max-width: 700px) {
+  .portfolio-card h3 {
+    font-size: clamp(13px, 4cqi, 26px);
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+  }
+  .portfolio-card span {
+    min-width: 0;
+    padding: 4px 9px;
+    border-width: 1px;
+    font-size: clamp(9px, 1.85cqi, 13px);
+    letter-spacing: 0.04em;
+  }
+  .portfolio-card .portfolio-footer {
+    min-height: clamp(44px, 10cqi, 64px);
+    height: auto;
+    column-gap: 6px;
+    padding: 6px clamp(8px, 2cqi, 16px);
+  }
+}
+
+@container pcard (max-width: 380px) {
+  .portfolio-card h3 {
+    font-size: clamp(10px, 3.6cqi, 16px);
+    line-height: 1;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+  .portfolio-card .portfolio-footer {
+    min-height: clamp(34px, 9cqi, 46px);
+    column-gap: 4px;
+    padding: 4px 8px;
+  }
+  .portfolio-card span {
+    min-width: 0;
+    padding: 2px 5px;
+    font-size: clamp(5.5px, 0.92cqi, 6.5px);
+    letter-spacing: 0;
+  }
+}
+
+.person-card img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.announcement-card a {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* ============================================================
+ * LATEST ANNOUNCEMENTS — Wix-inspired card with rounded corners,
+ * date label, title (2-line clamp), underline divider, heart icon.
+ * Whole card is one big link target.
+ * Pagination slides cards in/out Netflix-style.
+ * ============================================================ */
+
+/* Viewport clips overflow during slide animation. Its height is driven by the
+ * active page (set inline from React) so a page with fewer cards collapses
+ * instead of leaving empty space — height animates in step with the slide. */
+.announcement-viewport {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  transition: height 620ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.announcement-grid {
+  --announcement-page: 0;
+  display: flex;
+  width: 100%;
+  transform: translateX(calc(var(--announcement-page) * -100%));
+  transition: transform 620ms cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+
+.announcement-page {
+  flex: 0 0 100%;
+  /* Sit at the top of the slide track and keep natural height so a page with
+   * fewer cards never gets stretched to fill the tallest page's height. */
+  align-self: start;
+  align-content: start;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(14px, 1.4vw, 24px);
+}
+
+/* Card = single image block. Text OVERLAYS on top of the image. */
+.announcement-card {
+  position: relative;
+  border-radius: 14px;
+  border: 0;
+  background: #0d1216;
+  overflow: hidden;
+  box-shadow: none;
+  transition: transform 240ms ease, box-shadow 240ms ease;
+}
+
+.announcement-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+}
+
+/* Anchor is positioned, has aspect-ratio so card has a fixed shape.
+ * Image is absolute INSIDE — fills entire card. Text body absolute
+ * on TOP of the image with a dark gradient for readability. */
+.announcement-card > a {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  height: auto;
+  padding: 0;
+  margin-top: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Image fills the entire card */
+.announcement-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+  display: block;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Dark gradient overlay (top + bottom) for text readability */
+.announcement-card > a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.50) 0%,
+    rgba(0, 0, 0, 0.10) 25%,
+    rgba(0, 0, 0, 0) 45%,
+    rgba(0, 0, 0, 0.30) 65%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Text body OVERLAYS the image — date pinned top-left,
+ * title + heart pinned bottom-left with breathing room. */
+.announcement-body {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 18px 18px;
+  background: transparent;
+  pointer-events: none;
+  gap: 0;
+}
+
+.announcement-body > * {
+  pointer-events: auto;
+}
+
+/* Date stays at top */
+.announcement-date {
+  flex: 0 0 auto;
+}
+
+/* Spacer pushes title + heart to bottom */
+.announcement-body::before {
+  content: "";
+  flex: 1;
+  pointer-events: none;
+}
+
+/* Title in flex layout, sits above heart */
+.announcement-body h3 {
+  flex: 0 0 auto;
+  margin-bottom: 12px;
+}
+
+/* Heart sits at the very bottom */
+.announcement-body .announcement-like {
+  flex: 0 0 auto;
+}
+
+.announcement-date {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.announcement-card h3 {
+  margin: 0 !important;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.32);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.3 !important;
+  /* Hard 2-line clamp with ellipsis — never escapes the box. */
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  /* Hard max-height as fallback for browsers ignoring -webkit-line-clamp */
+  max-height: calc(1.3em * 2) !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Heart icon — outline by default; filled red on click (.is-liked) */
+.announcement-like {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: color 200ms ease, transform 180ms ease;
+}
+
+.announcement-like svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  transition: fill 200ms ease, stroke 200ms ease, transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.announcement-like:hover svg {
+  color: #ff5d6e;
+  transform: scale(1.15);
+}
+
+.announcement-like.is-liked svg {
+  fill: #ff3b53;
+  stroke: #ff3b53;
+  color: #ff3b53;
+  transform: scale(1.15);
+}
+
+@media (max-width: 1180px) {
+  .announcement-page {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .announcement-page {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* (Founders + Advisors share the .advisor-card design defined later in
+ * this file — see the .advisor-card rule block at the bottom which
+ * applies image-overlay layout with a Read-more pill at the bottom.
+ * Founders inherit the same look via the explicit selectors there.) */
+
+/* ============================================================
+ * CORE CONTRIBUTORS — text cards now get image frames (placeholders)
+ * so they share visual rhythm with founders/advisors.
+ * The HTML doesn't include real images yet, so we use a CSS-only
+ * placeholder via ::before. When images are added later, the rule can
+ * be replaced with real <img>.
+ * ============================================================ */
+
+.text-card {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 22px;
+  background: #0a0d0f;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: clamp(280px, 24vw, 380px);
+  padding: 0;
+}
+
+.text-card::before {
+  content: "";
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(137, 235, 207, 0.18), transparent 65%),
+    linear-gradient(180deg, #1a2426, #0a0d0f);
+}
+
+.text-card small,
+.text-card strong {
+  padding-inline: 22px;
+}
+
+.text-card small {
+  padding-top: 16px;
+  color: var(--color-primary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.text-card strong {
+  display: block;
+  padding-bottom: 22px;
+  margin-top: 4px;
+  color: #fff;
+  font-size: clamp(1rem, 1.3vw, 1.3rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.mini-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 14px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+.mini-card strong,
+.text-card strong {
+  display: block;
+  margin-top: 6px;
+}
+
+.text-card {
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.announcement-card h3 {
+  font-size: 1rem;
+}
+
+/* ============================================================
+ * PARTNERS (logo grid)
+ * ============================================================ */
+
+/* Partner card: ALWAYS square based on grid cell width — scales
+ * proportionally with viewport. NO fixed min-height (the previous
+ * 150-232px min-height forced cards larger than their grid track,
+ * causing them to overlap at narrow viewports). */
+.partner-card {
+  width: 100%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: clamp(8px, 1.2vw, 24px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: clamp(12px, 1.4vw, 22px);
+  background: rgba(0, 0, 0, 0.78);
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: transform 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
+}
+
+.partner-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(137, 235, 207, 0.35);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 0 1px rgba(137, 235, 207, 0.18);
+}
+
+.logo-grid img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ============================================================
+ * ACHIEVEMENTS
+ * ============================================================ */
+
+.achievements-section {
+  padding-top: clamp(70px, 7vw, 126px);
+}
+
+.achievement-card {
+  width: 100%;
+  aspect-ratio: 1.02;
+  display: grid;
+  place-items: center;
+  padding: clamp(22px, 2.2vw, 42px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 28px;
+  background: #1c1c1f;
+}
+
+.achievement-card-featured {
+  aspect-ratio: 1.14;
+}
+
+.achievement-card img {
+  width: 100%;
+  height: 100%;
+  max-height: 170px;
+  object-fit: contain;
+}
+
+/* Achievements marquee — two rows scrolling in opposite directions */
+.achievement-grid.marquee {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+.achievement-grid.marquee + .achievement-grid.marquee {
+  margin-top: clamp(16px, 1.6vw, 28px);
+}
+.achievement-grid.marquee .marquee-track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: clamp(16px, 1.6vw, 28px);
+  width: max-content;
+  animation: achievement-marquee-left var(--marquee-duration, 45s) linear infinite;
+  will-change: transform;
+}
+.achievement-grid.marquee.is-reverse .marquee-track {
+  animation-name: achievement-marquee-right;
+}
+.achievement-grid.marquee .achievement-card {
+  flex: 0 0 auto;
+  width: clamp(150px, 16vw, 220px);
+  margin: 0;
+}
+.achievement-grid.marquee .achievement-card-featured {
+  width: clamp(180px, 18vw, 240px);
+}
+.achievement-grid.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes achievement-marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes achievement-marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .achievement-grid.marquee .marquee-track { animation: none; }
+}
+
+/* ============================================================
+ * ACTIVITIES (masonry columns)
+ * ============================================================ */
+
+.activity-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 0;
+  box-shadow: var(--shadow-lg);
+  transition: transform 280ms ease, box-shadow 280ms ease, outline-color 280ms ease;
+}
+
+.activity-grid img:hover {
+  transform: translateY(-4px);
+  outline: 1px solid rgba(137, 235, 207, 0.35);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 0 1px rgba(137, 235, 207, 0.18);
+}
+
+.extra-activity { display: none; }
+.activity-grid.show-all .extra-activity { display: block; }
+
+.load-more {
+  margin: 16px auto 0;
+  display: block;
+  min-height: 54px;
+  padding: 0 28px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* ============================================================
+ * ADVISORS
+ * ============================================================ */
+
+.advisors-section {
+  padding-top: clamp(70px, 7vw, 126px);
+}
+
+/* Carousel arrows are a mobile-only affordance (the people grid only scrolls
+ * at ≤780px). Hide them everywhere by default; responsive.css re-shows them
+ * inside the ≤780px block. */
+.team-carousel-arrow {
+  display: none;
+}
+
+/* Team cards: image at natural aspect with rounded corners.
+ * Text OVERLAYS on the BOTTOM of the image (with gradient for
+ * readability) — NO separate dark band below the image. */
+.advisor-card,
+.person-card {
+  position: relative;
+  overflow: visible;
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.advisor-card > a,
+.person-card > a {
+  position: relative;
+  display: block;
+  height: auto;
+  color: #fff;
+  margin-top: 0;
+  text-decoration: none;
+}
+
+/* Image: fixed aspect to avoid huge portraits stretching the row. */
+.advisor-card img,
+.person-card img {
+  position: static;
+  inset: auto;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+  filter: none;
+  background: transparent;
+  display: block;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.founders-grid .person-card img {
+  aspect-ratio: 1 / 1;
+}
+
+
+/* Dark gradient overlay on bottom of image for text readability */
+.advisor-card > a::after,
+.person-card > a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 45%,
+    rgba(0, 0, 0, 0.40) 70%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  border-radius: 18px;
+  pointer-events: none;
+}
+
+/* Text overlay positioned at bottom of image */
+.advisor-card > a > div,
+.person-card > a > div {
+  position: absolute;
+  left: clamp(18px, 1.8vw, 28px);
+  right: clamp(18px, 1.8vw, 28px);
+  bottom: clamp(16px, 1.6vw, 24px);
+  z-index: 2;
+  display: grid;
+  gap: 6px;
+  padding: 0;
+  background: transparent;
+}
+
+.advisor-card small,
+.person-card small {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: clamp(0.86rem, 1vw, 1.05rem);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.advisor-card strong,
+.person-card h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.2rem, 1.4vw, 1.6rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* "Read more" pill — WHITE border + WHITE text (like .load-more);
+ * inverts on hover (white bg, dark text). */
+.advisor-card span,
+.person-card span {
+  width: fit-content;
+  margin: 12px 0 0;
+  padding: 9px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: clamp(0.78rem, 0.85vw, 0.92rem);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.advisor-card a:hover span,
+.advisor-card a:focus-visible span,
+.person-card a:hover span,
+.person-card a:focus-visible span {
+  background: #fff;
+  color: #0a0d0f;
+  border-color: #fff;
+}
+
+/* ============================================================
+ * FOLLOW BUTTONS + MARQUEE
+ * ============================================================ */
+
+.follow-buttons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: #070b0c;
+}
+
+.marquee {
+  overflow: hidden;
+}
+
+/* Each item is now an <a class="marquee-link"> linking to X. */
+.marquee-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 200ms ease, transform 200ms ease;
+}
+
+.marquee-link:hover {
+  color: var(--color-accent);
+  transform: scale(1.02);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 48px;
+  width: max-content;
+  padding: 20px 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+ * FOOTER
+ * ============================================================ */
+
+.site-footer p {
+  margin: 16px 0 0;
+  color: var(--muted);
+}
+
+.footer-link {
+  color: var(--color-primary);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.footer-columns strong { color: var(--text); }
+.footer-columns a { color: var(--color-primary); }
+
+/* ============================================================
+ * DETAIL / SUB PAGES (page-hero, post, profile)
+ * ============================================================ */
+
+.page-hero span,
+.detail-title span,
+.profile-detail span,
+.breadcrumb,
+.post-header p {
+  color: var(--color-primary);
+  font-size: 0.94rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.page-hero h1,
+.detail-title h1,
+.profile-detail h1,
+.post-header h1 {
+  margin: 10px 0 18px;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(3.2rem, 7vw, 7rem);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+/* Blog hero: only the big "Latest Announcements" title remains. It is a long
+   two-word phrase, so cap the per-viewport size lower than the generic hero
+   (the heading font is very wide) to keep "ANNOUNCEMENTS" from overflowing /
+   clipping on tablet and phone. Capped a touch smaller than the generic hero. */
+.blog-page .page-hero h1 {
+  font-size: clamp(1.7rem, 8vw, 6rem);
+}
+
+/* Blog hero box: raise the title (shorter block) and drop the divider line. */
+.blog-page .compact-hero {
+  min-height: 220px;
+  padding-bottom: 24px;
+  border-bottom: none;
+}
+
+.page-hero p,
+.detail-title p {
+  max-width: 860px;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(1.04rem, 1.4vw, 1.32rem);
+  line-height: 1.7;
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.breadcrumb a {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.detail-title .ghost-button {
+  margin-top: 26px;
+}
+
+.detail-hero-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.detail-hero-band h1 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 5.2vw, 5rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  white-space: nowrap;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.detail-type-badge {
+  font-family: var(--font-heading);
+  font-size: clamp(0.9rem, 1.8vw, 2rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.detail-cover {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid rgba(183, 232, 255, 0.52);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  margin-top: 24px;
+}
+
+/* Hero media (image OR autoplaying video) below the title bar. */
+.detail-hero-media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  border: 1px solid rgba(183, 232, 255, 0.52);
+  border-radius: var(--radius-lg);
+  background: #000;
+  box-shadow: var(--shadow-lg);
+  margin-top: 24px;
+  transition: transform 320ms ease, box-shadow 320ms ease;
+}
+
+.detail-hero-media:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 64px rgba(0, 0, 0, 0.6);
+}
+
+/* Editorial section label (Synopsis / Overview / Logline / Concept Design) —
+ * clean bold sans, matching the original Avalook project pages. */
+.detail-section-label {
+  margin: 0 0 clamp(18px, 2vw, 30px);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 2.2vw, 2.4rem);
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #fff;
+}
+
+/* Synopsis/Overview: label column on the left (~37%), justified copy on the
+ * right — mirrors the original project layout. */
+.detail-overview-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.62fr) minmax(0, 1fr);
+  gap: clamp(24px, 3vw, 64px);
+  align-items: start;
+}
+
+.detail-overview-grid .detail-section-label {
+  margin: 0;
+}
+
+/* Higher specificity than the base `.rich-copy` (which is defined later in the
+ * file) so the project synopsis copy gets its larger, justified styling. */
+.rich-copy.detail-overview-copy {
+  text-align: justify;
+  font-size: clamp(1.25rem, 1.62vw, 1.75rem);
+  line-height: 1.72;
+}
+
+.detail-gallery-heading {
+  margin-bottom: clamp(28px, 3.2vw, 48px);
+}
+
+/* A little more breathing room between the copy and gallery sections. */
+.detail-gallery-section {
+  margin-top: clamp(18px, 2.4vw, 40px);
+}
+
+/* Stack the synopsis label above the copy on narrow tablets / phones. */
+@media (max-width: 960px) {
+  .detail-overview-grid {
+    grid-template-columns: 1fr;
+    gap: clamp(12px, 2vw, 20px);
+  }
+  .detail-overview-grid .detail-section-label {
+    margin-bottom: clamp(12px, 2vw, 18px);
+  }
+}
+
+.detail-hero-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.detail-hero-top h1 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(3.2rem, 7vw, 7rem);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--color-primary);
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.detail-category {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 2.4vw, 2.4rem);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding-bottom: 14px;
+}
+
+@media (max-width: 720px) {
+  .detail-hero-top { flex-direction: column; align-items: flex-start; gap: 8px; }
+  /* Stretch the title to the full column width so useFitOneLine can measure
+   * the real available width and shrink the font to keep it on one line. */
+  .detail-hero-top h1 { align-self: stretch; }
+  .detail-category { padding-bottom: 0; }
+}
+
+.detail-cover-wide {
+  margin-top: 28px;
+  aspect-ratio: 21 / 9;
+}
+
+.detail-meta {
+  position: sticky;
+  top: 110px;
+  display: grid;
+  gap: 12px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(12, 17, 18, 0.96), rgba(4, 7, 8, 0.94));
+}
+
+.detail-meta strong { font-size: 1.15rem; }
+.detail-meta span { color: var(--muted); line-height: 1.45; }
+
+.rich-copy {
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.78;
+}
+
+.rich-copy p { margin: 0 0 18px; }
+.rich-copy ul { margin: 18px 0 0; padding-left: 22px; }
+.rich-copy li { margin-bottom: 10px; }
+.rich-copy a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.detail-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 22px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: #000;
+  box-shadow: var(--shadow-lg);
+}
+
+.detail-gallery img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: var(--shadow-lg);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.detail-gallery img:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 52px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- Blog (editorial list: cover left, text right) ---------- */
+.blog-card {
+  display: grid;
+  grid-template-columns: minmax(0, 42%) 1fr;
+  align-items: center;
+  gap: clamp(18px, 3vw, 40px);
+  padding: clamp(14px, 1.6vw, 22px);
+  border: 1px solid transparent;
+  border-radius: 26px;
+  background: transparent;
+  box-shadow: none;
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+
+.blog-card:hover {
+  border-color: rgba(137, 235, 207, 0.45);
+  transform: translateY(-2px);
+}
+
+.blog-card-media {
+  display: block;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.blog-card-media img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+  transition: transform 320ms ease;
+}
+
+.blog-card:hover .blog-card-media img {
+  transform: scale(1.04);
+}
+
+.blog-card-body {
+  padding: clamp(4px, 0.8vw, 14px) clamp(6px, 1vw, 16px);
+  min-width: 0;
+}
+
+.blog-card-meta {
+  margin: 0 0 12px;
+  color: var(--color-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.blog-card-title {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.1vw, 1.9rem);
+  line-height: 1.3;
+}
+
+.blog-card-title a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.blog-card-title a:hover {
+  color: #fff;
+}
+
+.blog-card-excerpt {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.blog-card-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  color: var(--color-primary);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: gap 200ms ease, color 180ms ease;
+}
+
+.blog-card-more:hover {
+  color: #fff;
+  gap: 12px;
+}
+
+/* Phone: stack the cover on top, text below */
+@media (max-width: 640px) {
+  .blog-card {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  .blog-card-media {
+    border-radius: 0;
+  }
+  .blog-card-body {
+    padding: 18px 20px 22px;
+  }
+}
+
+/* ---------- Post (blog-article layout) ---------- */
+
+/* Meta line: "date · read time" on the left, a share (⋮) button on the right */
+.post-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.post-more {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 180ms ease, background-color 180ms ease;
+}
+
+.post-more svg { width: 20px; height: 20px; }
+
+.post-more:hover {
+  color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Title — KNOB display font, mint green (matches the original post pages) */
+.post-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.post-updated {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.post-cover {
+  width: 100%;
+  max-height: 720px;
+  margin-top: 26px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Thin divider used above the share row and the comments heading */
+.post-rule {
+  height: 1px;
+  margin: 26px 0;
+  background: var(--line);
+}
+
+/* Share row — small monochrome icon buttons */
+.post-share {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.post-share button {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 180ms ease, background-color 180ms ease;
+}
+
+.post-share svg { width: 18px; height: 18px; }
+
+.post-share button:hover {
+  color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ---------- Recent posts ---------- */
+.recent-posts { margin-top: 56px; }
+
+.recent-posts-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.recent-posts-title {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+.recent-posts-all {
+  color: var(--color-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.recent-posts-all:hover { color: #fff; }
+
+.recent-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 26px);
+}
+
+/* Phone: stack the recent-post cards so the titles stay readable */
+@media (max-width: 640px) {
+  .recent-posts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.recent-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.recent-card-media {
+  display: block;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.recent-card-media img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+  transition: transform 320ms ease;
+}
+
+.recent-card:hover .recent-card-media img { transform: scale(1.04); }
+
+.recent-card-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(0.95rem, 1.3vw, 1.12rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  transition: color 160ms ease;
+}
+
+.recent-card:hover .recent-card-title { color: #fff; }
+
+/* ---------- Comments (placeholder until the backend lands) ---------- */
+.post-comments { margin-top: 56px; }
+
+.post-comments-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.comment-box {
+  padding: 18px 20px;
+  min-height: 92px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.profile-detail-grid img {
+  width: 100%;
+  max-height: 680px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.profile-detail .rich-copy { max-width: 760px; }
+
+/* ============================================================
+ * FOOTER CTA — Contact us pill + 3 social icon buttons (white circles)
+ * ============================================================ */
+
+/* Contact us — rounded white pill, dark text. Inverts on hover. */
+.footer-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  background: #fff;
+  color: #0a0d0f;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    transform 160ms ease;
+}
+
+.footer-contact-btn:hover,
+.footer-contact-btn:focus-visible {
+  background: transparent;
+  color: #fff;
+  outline: none;
+}
+
+/* Social icons — solid white circle, black icon, beautiful hover. */
+.footer-social {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 18px;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.footer-social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 64px;
+  height: 64px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: #0a0d0f;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition:
+    background-color 220ms ease,
+    color 220ms ease,
+    transform 200ms ease,
+    box-shadow 220ms ease;
+}
+
+.footer-social-btn:hover,
+.footer-social-btn:focus-visible {
+  background: var(--color-primary);
+  color: #0a0d0f;
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 10px 24px rgba(137, 235, 207, 0.32);
+  outline: none;
+}
+
+.footer-social-btn svg {
+  display: block;
+  width: 28px !important;
+  height: 28px !important;
+}
+
+/* ============================================================
+ * ANNOUNCEMENTS PAGINATION — < 1 2 > with smooth fade animation
+ * ============================================================ */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1vw, 16px);
+  margin-top: clamp(28px, 3vw, 48px);
+}
+
+.pagination-arrow,
+.pagination-page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease,
+    transform 160ms ease;
+}
+
+.pagination-arrow {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.pagination-arrow:hover:not(:disabled),
+.pagination-page:hover:not(.is-active) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.pagination-page.is-active {
+  background: var(--color-primary);
+  color: #0a0d0f;
+  border-color: var(--color-primary);
+}
+
+.pagination-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+ * PROJECT DETAIL TITLE — title on left, type badge on right,
+ * both on the SAME single row across all portfolio subpages.
+ * ============================================================ */
+.detail-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 24px;
+  row-gap: 10px;
+}
+.detail-title > h1 {
+  order: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: clamp(2rem, 5vw, 5rem);
+}
+.detail-title > span {
+  order: 2;
+  flex: 0 0 auto;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.detail-title > p,
+.detail-title > .ghost-button {
+  order: 3;
+  flex: 0 0 100%;
+}
+.detail-title > p { margin-top: 6px; }
+
+/* ============================================================
+ * FOOTER SOCIAL — force horizontal row of 3 white circle icons
+ * High-specificity override (defeats any cached/conflicting rule)
+ * ============================================================ */
+.site-footer .footer-cta .footer-social {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  gap: 18px !important;
+  width: auto !important;
+  margin-top: 14px !important;
+}
+
+.site-footer .footer-cta .footer-social .footer-social-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 999px !important;
+  background: #fff !important;
+  color: #0a0d0f !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  text-decoration: none !important;
+}
+
+.site-footer .footer-cta .footer-social .footer-social-btn svg {
+  display: block !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.site-footer .footer-cta .footer-social .footer-social-btn:hover,
+.site-footer .footer-cta .footer-social .footer-social-btn:focus-visible {
+  background: var(--color-primary) !important;
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Allow the right column to be wide enough to hold the 3 circles in a row */
+.site-footer .footer-cta {
+  min-width: clamp(220px, 18vw, 320px) !important;
+}

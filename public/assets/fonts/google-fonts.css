@@ -1,0 +1,100 @@
+/* ============================================================
+ * Font face declarations.
+ * Strategy:
+ *  - KNOB (display heading) only ships weight 400 — DO NOT request 700,
+ *    or the browser will synthesize fake-bold and the strokes get heavier.
+ *    All `.hero-copy h1`, `.section-heading h2`, `.subheading`, `.marquee-track`
+ *    rules pin `font-weight: 400` and `:root` has `font-synthesis: none`.
+ *  - SF Pro Text ships 4 weights (400/500/600/700) — used for body / nav.
+ *  - Inter is a fallback in case SF Pro fails to load on Linux/Windows.
+ * ============================================================ */
+
+/* ---------- KNOB (Avalook display) ---------- */
+@font-face {
+  font-family: 'KNOB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../media/FONT/KNOB.otf') format('opentype');
+}
+
+/* Alias kept for backwards-compat with older CSS rules */
+@font-face {
+  font-family: 'Avalook Knob';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../media/FONT/KNOB.otf') format('opentype');
+}
+
+/* ---------- SVN Mission X (display fallback after KNOB) ---------- */
+@font-face {
+  font-family: 'SVN Mission X';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../media/FONT/Avalook%20Fonts/SVN-MissionX.otf') format('opentype');
+}
+
+/* ---------- SF Pro Text — 4 weights ---------- */
+@font-face {
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../media/FONT/Avalook%20Fonts/SF-Pro-Text-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../../media/FONT/Avalook%20Fonts/SF-Pro-Text-Medium.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../../media/FONT/Avalook%20Fonts/SF-Pro-Text-Semibold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../../media/FONT/Avalook%20Fonts/SF-Pro-Text-Bold.otf') format('opentype');
+}
+
+/* ---------- Inter (cross-platform body fallback) ---------- */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZg.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fMZg.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuGKYMZg.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuFuYMZg.ttf') format('truetype');
+}
+
+/* Anton (1Ptgg87LROyAm0K0.ttf) declaration removed — no longer used by any rule.
+ * The TTF file is left in /assets/fonts/ for reference and can be deleted. */

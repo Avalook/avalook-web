@@ -1,0 +1,492 @@
+/* ============================================================
+ * responsive.css — Media queries (tablet ≤ 1180px, mobile ≤ 780px)
+ * ============================================================ */
+
+@media (max-width: 1180px) {
+  .site-header {
+    grid-template-columns: auto auto;
+    padding-inline: 8px;
+  }
+
+  .site-nav {
+    position: fixed;
+    inset: 72px 18px auto;
+    display: grid;
+    justify-items: center;
+    gap: 0;
+    padding: 22px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(6, 18, 20, 0.9) 34%, rgba(31, 91, 100, 0.84) 100%);
+    box-shadow:
+      0 34px 90px rgba(0, 0, 0, 0.58),
+      inset 0 1px 0 rgba(137, 235, 207, 0.12);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity 200ms ease, transform 200ms ease;
+  }
+
+  .site-nav a {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 4.3vw, 3.25rem);
+    line-height: 1;
+    letter-spacing: 0.01em;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: 0 0 22px rgba(137, 235, 207, 0.16);
+  }
+
+  body.menu-open .site-nav {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .contact-pill { display: none; }
+  .nav-toggle { display: block; }
+
+  body.menu-open .nav-toggle span { background: white; }
+  body.menu-open .nav-toggle span:first-child { transform: translateY(9px) rotate(45deg); }
+  body.menu-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  body.menu-open .nav-toggle span:last-child { transform: translateY(-9px) rotate(-45deg); }
+
+  /* ─────────────────────────────────────────────────────────
+   * NOTE: column-count changes for content grids (about, portfolio,
+   * partners/logo, team founders/advisors/contributors, achievements,
+   * activity, blog) have been REMOVED from this tablet breakpoint.
+   * The desktop column structure stays intact — only sizes shrink as
+   * the viewport narrows. Restructuring happens at the phone breakpoint
+   * (≤ 780px) below.
+   * ───────────────────────────────────────────────────────── */
+
+  /* Hero stays full bleed at tablet too — no horizontal/vertical gap. */
+  .hero-frame {
+    width: 100%;
+    margin-top: 0;
+    aspect-ratio: 2850 / 1582;
+  }
+
+  /* Hero positioning vars stay % (already proportional).
+   * Font-sizes are now driven by `cqw` on .hero-frame (see components.css)
+   * — they auto-scale with the frame, so no per-breakpoint override needed. */
+
+  .who-we-are-mark img {
+    width: min(360px, 72vw);
+  }
+
+  /* Detail / inner-page layouts keep their stack at narrow tablet —
+     these are not on the home grid so the home structure rule above
+     does not apply. */
+  .detail-hero-grid,
+  .detail-layout,
+  .profile-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-meta { position: static; }
+
+  /* Concept-design gallery: 3 columns on desktop → 2 on tablet (→ 1 on phone,
+     handled in the max-width:780px block). */
+  .detail-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* NOTE: portfolio-card no longer has tablet-specific overrides here.
+     Container queries on the card itself (see components.css) handle all
+     size adaptation based on the card's own width — independent of viewport. */
+}
+
+@media (max-width: 780px) {
+  :root {
+    /* Mobile uses 92vw (4% margin each side) — narrow viewports need
+     * relatively LESS padding than wide ones to maximize content area. */
+    --max-width: 92vw;
+  }
+
+  .brand img,
+  .footer-logo {
+    width: 170px;
+  }
+
+  .site-header {
+    gap: 12px;
+  }
+
+  .hero {
+    padding-top: calc(136 / 2850 * 100vw);
+    overflow: hidden;
+    background: #031316;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0) 34%),
+      var(--hero-mobile-image, url("/assets/img/mobile-hero/9a6383_6ce78510f7274de192e054625645ab48~mv2-mobile-bg.png")) center top / 100% auto no-repeat;
+    pointer-events: none;
+  }
+
+  .hero-frame {
+    width: 100%;                   /* full bleed on mobile too */
+    aspect-ratio: 2850 / 1582;
+    margin-top: 0;
+    z-index: 1;
+  }
+
+  /* Hero on mobile uses the SAME positioning vars + cqw font sizes as
+   * desktop — the hero frame is a container query scope, so when it
+   * shrinks, the title and button auto-scale proportionally and end up
+   * exactly where they sit on laptop, just smaller. No mobile-specific
+   * overrides needed. (See layout.css for vars, components.css for fonts.) */
+
+  .ghost-button {
+    min-height: 58px;
+    padding-inline: 20px;
+  }
+
+  /* Exception: the hero button must shrink with the hero frame (cqw-driven)
+   * so it stays visually aligned with the title. Desktop sizing applies. */
+  .hero-copy .ghost-button {
+    min-height: 0;
+    padding-inline: clamp(14px, 1.7cqw, 28px);
+  }
+
+  .hero-copy {
+    --hero-button-top: 66%;
+  }
+
+  .hero-arrow { top: 61%; }
+  .hero-arrow-prev { left: 6px; }
+  .hero-arrow-next { right: 6px; }
+
+  .planet {
+    top: 118px;
+    right: 4px;
+    width: 92px;
+  }
+
+  /* Stack to 1 column for content grids on phone */
+  .about-grid,
+  .portfolio-grid,
+  .announcement-grid,
+  .achievement-grid,
+  .achievement-grid-featured,
+  .achievement-grid-compact,
+  .activity-grid,
+  .who-we-are-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Logo grid: 7 logos too tight on phone — show 2 per row */
+  .logo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .activities {
+    padding-top: 24px;
+  }
+
+  .activities .section-heading {
+    margin-bottom: 18px;
+  }
+
+  .activity-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .activity-grid img {
+    border-radius: 14px;
+  }
+
+  .portfolio-card .portfolio-footer {
+    grid-template-columns: minmax(0, 1fr) max-content;
+    min-height: 44px;
+    column-gap: 6px;
+    padding: 8px 12px;
+  }
+
+  .portfolio-card h3 {
+    font-size: clamp(12.5px, 3.42vw, 15.2px);
+    line-height: 1;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .portfolio-card span {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    padding: 2px 5px;
+    border-width: 1px;
+    font-size: 6.5px;
+    letter-spacing: 0;
+    transform: none;
+  }
+
+  .achievement-grid,
+  .achievement-grid-featured,
+  .achievement-grid-compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .achievement-grid-compact {
+    margin-top: 12px;
+  }
+
+  .achievement-card,
+  .achievement-card-featured {
+    aspect-ratio: 1;
+    padding: 12px;
+    border-radius: 16px;
+  }
+
+  .achievement-card img {
+    max-height: 92px;
+  }
+
+  .who-we-are-grid {
+    min-height: 0;
+    gap: 22px;
+  }
+
+  .who-we-are-section {
+    padding-top: 10px;
+  }
+
+  .who-we-are-mark {
+    padding-top: 0;
+  }
+
+  /* WHO WE ARE mark on mobile — smaller so it doesn't dominate the hero
+   * area which now has clamped-readable title text. */
+  .who-we-are-mark img {
+    width: min(200px, 54vw);
+  }
+
+  .team .section-heading {
+    padding-top: 0;
+    margin-top: -14px;
+    margin-bottom: 18px;
+  }
+
+  .team-carousel {
+    position: relative;
+    width: 100vw;
+    margin: 0 calc(50% - 50vw);
+  }
+
+  .team-carousel + .team-carousel {
+    margin-top: 22px;
+  }
+
+  /* Centered team carousel on phone: one card per view, no side peeking. */
+  .founders-grid,
+  .advisors-grid,
+  .contributor-grid,
+  .contributors-grid {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0;
+    width: 100vw;
+    padding: 4px 0 14px;
+    margin: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .founders-grid::-webkit-scrollbar,
+  .advisors-grid::-webkit-scrollbar,
+  .contributor-grid::-webkit-scrollbar,
+  .contributors-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .founders-grid > *,
+  .advisors-grid > *,
+  .contributor-grid > *,
+  .contributors-grid > * {
+    flex: 0 0 100vw;
+    box-sizing: border-box;
+    padding-inline: 24px;
+    scroll-snap-align: center;
+    min-width: 0;
+    transform: scale(var(--team-card-scale, 0.94));
+    transform-origin: center center;
+    transition: transform 180ms ease;
+  }
+
+  .team-carousel-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 4;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 56px;
+    margin-top: 10px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2.9rem;
+    font-weight: 300;
+    line-height: 1;
+    appearance: none;
+    outline: none;
+    transform: translateY(-50%);
+    transition: transform 200ms ease, color 200ms ease;
+  }
+
+  .team-carousel-arrow:hover,
+  .team-carousel-arrow:focus-visible {
+    color: var(--color-primary);
+    transform: translateY(-50%) scale(1.08);
+  }
+
+  .team-carousel-arrow:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .team-carousel-prev { left: 6px; }
+  .team-carousel-next { right: 6px; }
+
+  /* NOTE: portfolio-card mobile sizes handled by container queries (see components.css).
+     logo-grid columns handled by auto-fit (see layout.css).
+     No manual breakpoint sizing needed here. */
+
+  .who-we-are-copy p {
+    font-size: clamp(1.25rem, 6vw, 1.85rem);
+    line-height: 1.2;
+  }
+
+  .section { padding-top: 64px; }
+
+  .site-footer {
+    padding-bottom: 36px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-hero,
+  .detail-hero,
+  .profile-detail,
+  .post-layout {
+    padding-top: 58px;
+  }
+
+  .compact-hero {
+    min-height: 300px;
+    padding-bottom: 30px;
+  }
+
+  .page-hero h1,
+  .detail-title h1,
+  .profile-detail h1,
+  .post-header h1 {
+    font-size: clamp(2.5rem, 14vw, 4.6rem);
+  }
+
+  .blog-grid,
+  .detail-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .post-layout {
+    width: var(--max-width);
+  }
+}
+
+/* ============================================================
+ * HEADER — fully transparent at every mobile/tablet breakpoint.
+ * The dropdown nav (.site-nav) keeps its own glass background;
+ * only the header bar itself must stay invisible.
+ * ============================================================ */
+@media (max-width: 1180px) {
+  .site-header,
+  .site-header.is-scrolled,
+  .site-header.scrolled,
+  .site-header[data-scrolled="true"] {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-bottom: none !important;
+  }
+}
+
+/* ============================================================
+ * PAGE BACKGROUND — per-view tuning of the fixed ambient backdrop.
+ *
+ * The base `body::before` (section-backgrounds.css) is tuned for wide
+ * desktop. On narrower/taller screens its corner auras bunch up, so here
+ * we re-tune ONLY the aura geometry + gradient stops per breakpoint —
+ * SAME hues (teal/magenta/cyan/pink) and the same calm, even tone. This
+ * file loads last, so these win on tablet/mobile.
+ * ============================================================ */
+
+/* Tablet (~640–1180px): squarer auras, pulled toward the corners gently. */
+@media (max-width: 1180px) {
+  body::before {
+    background-image:
+      radial-gradient(ellipse 92% 38% at 14% 0%, rgba(45, 212, 191, 0.19), transparent 60%),
+      radial-gradient(ellipse 82% 42% at 100% 24%, rgba(168, 85, 247, 0.15), transparent 62%),
+      radial-gradient(ellipse 82% 40% at 0% 72%, rgba(34, 211, 238, 0.13), transparent 60%),
+      radial-gradient(ellipse 78% 36% at 100% 100%, rgba(244, 114, 182, 0.11), transparent 62%),
+      linear-gradient(180deg, #070a1c 0%, #0a1028 30%, #0b1230 60%, #070c20 82%, #04060f 100%);
+  }
+}
+
+/* Mobile (portrait, tall + narrow): spread the auras DOWN the page as soft
+ * horizontal bands (teal → magenta → cyan → pink) so the colour flows top
+ * to bottom instead of clumping in one corner. */
+@media (max-width: 780px) {
+  body::before {
+    background-image:
+      radial-gradient(ellipse 135% 22% at 50% 0%, rgba(45, 212, 191, 0.18), transparent 62%),
+      radial-gradient(ellipse 110% 20% at 100% 28%, rgba(168, 85, 247, 0.16), transparent 64%),
+      radial-gradient(ellipse 110% 20% at 0% 60%, rgba(34, 211, 238, 0.14), transparent 62%),
+      radial-gradient(ellipse 135% 22% at 50% 100%, rgba(244, 114, 182, 0.13), transparent 64%),
+      linear-gradient(180deg, #070a1c 0%, #0a1028 26%, #0b1230 52%, #090f28 78%, #04060f 100%);
+  }
+}
+
+/* ============================================================
+ * FOOTER (phones ≤520px) — let the Get-in-touch / Contact / social block
+ * share a row with the nav as a 2nd column. The desktop CTA forces a 220px
+ * min-width and 56px social circles (components.css, !important); shrink
+ * both here (loads last) so the block fits a half-width column.
+ * ============================================================ */
+@media (max-width: 520px) {
+  .site-footer .footer-cta {
+    min-width: 0 !important;
+  }
+  .site-footer .footer-cta .footer-social {
+    gap: 12px !important;
+  }
+  .site-footer .footer-cta .footer-social .footer-social-btn {
+    width: 44px !important;
+    height: 44px !important;
+  }
+  .site-footer .footer-cta .footer-social .footer-social-btn svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}

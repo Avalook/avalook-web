@@ -1,0 +1,10 @@
+.vercel
+.output
+.DS_Store
+Thumbs.db
+*.zip
+media/*
+.claude/
+node_modules
+node_modules/
+dist/
