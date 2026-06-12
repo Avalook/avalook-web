@@ -7,7 +7,7 @@
 //   DASHBOARD_PASSWORD  the login password
 //   SESSION_SECRET      ≥32 random chars used to encrypt the session cookie
 //   GITHUB_TOKEN        a fine-grained PAT with "Contents: read & write" on the repo
-//   GITHUB_REPO         e.g. "nguyencongtuyenlp/avalook" (optional, has a default)
+//   GITHUB_REPO         e.g. "Avalook/avalook-web" (optional, defaults to this repo)
 //   GITHUB_BRANCH       e.g. "main" (optional, defaults to "main")
 
 import { createServerFn } from "@tanstack/react-start";
@@ -70,7 +70,7 @@ function base64Utf8(input: string): string {
 
 async function commitContentToGitHub(state: CmsState) {
   const token = process.env.GITHUB_TOKEN;
-  const repo = process.env.GITHUB_REPO ?? "nguyencongtuyenlp/avalook";
+  const repo = process.env.GITHUB_REPO ?? "Avalook/avalook-web";
   const branch = process.env.GITHUB_BRANCH ?? "main";
   const path = "src/content/cms.json";
 
