@@ -35,6 +35,7 @@ import {
 import { loadState, saveState, clearState, uid } from "./storage";
 import { seedState } from "./seed";
 import { publishFn, logoutFn } from "@/lib/cms-server";
+import { isVideoUrl } from "@/lib/media";
 import { ChooseFieldTypeModal } from "./ChooseFieldTypeModal";
 import { AddFieldModal } from "./AddFieldModal";
 import { ItemEditorModal } from "./ItemEditorModal";
@@ -774,14 +775,20 @@ function Cell({
   collections: Collection[];
 }) {
   switch (field.type) {
-    case "image":
-      return asString(value) ? (
-        <img className="cms-thumb" src={asString(value)} alt="" loading="lazy" />
+    case "image": {
+      const val = asString(value);
+      if (!val)
+        return (
+          <span className="cms-thumb cms-thumb-empty">
+            <ImageIcon size={16} />
+          </span>
+        );
+      return isVideoUrl(val) ? (
+        <video className="cms-thumb" src={val} muted playsInline preload="metadata" />
       ) : (
-        <span className="cms-thumb cms-thumb-empty">
-          <ImageIcon size={16} />
-        </span>
+        <img className="cms-thumb" src={val} alt="" loading="lazy" />
       );
+    }
 
     case "color":
       return asString(value) ? (

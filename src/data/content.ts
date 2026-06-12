@@ -27,6 +27,7 @@ import {
 } from "./team";
 import cmsRaw from "@/content/cms.json";
 import type { CmsState, Collection, Item } from "@/components/cms/types";
+import { isVideoUrl } from "@/lib/media";
 
 const cms = cmsRaw as unknown as CmsState;
 
@@ -71,13 +72,20 @@ export const postsBySlug: Record<string, Post> = cmsPosts
 // ---- Portfolio cards ------------------------------------------------------
 const cmsProjects = col("projects");
 export const portfolio: PortfolioCard[] = cmsProjects
-  ? live(cmsProjects).map((it) => ({
-      title: s(it.title),
-      type: s(it.type),
-      accent: s(it.accent) || "#116dff",
-      href: s(it.href),
-      image: s(it.image) || undefined,
-    }))
+  ? live(cmsProjects).map((it) => {
+      // The Image field doubles as a video slot — an editor may upload a clip.
+      const media = s(it.image);
+      const video = isVideoUrl(media);
+      return {
+        title: s(it.title),
+        type: s(it.type),
+        accent: s(it.accent) || "#116dff",
+        href: s(it.href),
+        image: video ? undefined : media || undefined,
+        video: video ? media : undefined,
+        poster: s(it.poster) || undefined,
+      };
+    })
   : staticPortfolio;
 
 // ---- Activities gallery ---------------------------------------------------

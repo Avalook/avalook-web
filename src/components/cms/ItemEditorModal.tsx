@@ -4,6 +4,7 @@ import type { Collection, Field, Item } from "./types";
 import { slugify, uid } from "./storage";
 import { RichTextEditor } from "./RichTextEditor";
 import { MediaUpload } from "./MediaUpload";
+import { isVideoUrl } from "@/lib/media";
 
 type Props = {
   collection: Collection;
@@ -249,7 +250,7 @@ function FieldEditor({
 
     case "image": {
       const val = asString(value);
-      const isVideo = /\.(mp4|webm|mov|m4v)(\?|#|$)/i.test(val);
+      const isVideo = isVideoUrl(val);
       return (
         <div className="cms-img-edit">
           {val ? (
