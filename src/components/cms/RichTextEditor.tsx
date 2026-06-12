@@ -20,13 +20,17 @@ import {
   Quote,
   Link2,
   Image as ImageIcon,
+  Film,
   Undo2,
   Redo2,
 } from "lucide-react";
-import type { ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
+import { Video } from "./VideoNode";
+import { uploadToBlob } from "./upload";
 
 /** True when the string already carries block-level HTML (a prior TipTap save). */
-const isBlockHtml = (v: string) => /<(p|h[1-6]|ul|ol|li|blockquote|figure|img|hr|table)\b/i.test(v);
+const isBlockHtml = (v: string) =>
+  /<(p|h[1-6]|ul|ol|li|blockquote|figure|img|video|iframe|hr|table)\b/i.test(v);
 
 /** Convert legacy plain-text (blank-line paragraphs) into HTML TipTap can load. */
 const toEditorHtml = (raw: string): string => {
@@ -59,6 +63,7 @@ export function RichTextEditor({
         },
       }),
       Image.configure({ HTMLAttributes: { class: "post-inline-img" } }),
+      Video,
       Placeholder.configure({
         placeholder: "Viết nội dung bài viết… Bôi đen chữ rồi bấm nút để định dạng.",
       }),
@@ -70,6 +75,10 @@ export function RichTextEditor({
       onChange(html === "<p></p>" ? "" : html); // normalise the empty doc to ""
     },
   });
+
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const videoInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState<{ kind: "image" | "video"; pct: number } | null>(null);
 
   if (!editor) {
     return <div className="cms-rte cms-rte-loading">Đang tải trình soạn thảo…</div>;
@@ -86,14 +95,44 @@ export function RichTextEditor({
     editor.chain().focus().extendMarkRange("link").setLink({ href: url.trim() }).run();
   };
 
-  const addImage = () => {
-    const url = window.prompt("Dán URL ảnh (vd /assets/img/cover.jpg hoặc https://…):", "");
-    if (!url || !url.trim()) return;
-    editor.chain().focus().setImage({ src: url.trim() }).run();
+  const handleFile = async (file: File | undefined, kind: "image" | "video") => {
+    if (!file) return;
+    setUploading({ kind, pct: 0 });
+    try {
+      const url = await uploadToBlob(file, (pct) => setUploading({ kind, pct }));
+      if (kind === "video") editor.chain().focus().setVideo({ src: url }).run();
+      else editor.chain().focus().setImage({ src: url }).run();
+    } catch (err) {
+      window.alert(err instanceof Error ? err.message : "Upload thất bại.");
+    } finally {
+      setUploading(null);
+    }
   };
 
   return (
     <div className="cms-rte">
+      <input
+        ref={imageInputRef}
+        type="file"
+        accept="image/*"
+        hidden
+        onChange={(e) => {
+          const f = e.target.files?.[0];
+          e.target.value = "";
+          void handleFile(f, "image");
+        }}
+      />
+      <input
+        ref={videoInputRef}
+        type="file"
+        accept="video/*"
+        hidden
+        onChange={(e) => {
+          const f = e.target.files?.[0];
+          e.target.value = "";
+          void handleFile(f, "video");
+        }}
+      />
       <div className="cms-rte-toolbar">
         <Btn
           onClick={() => editor.chain().focus().toggleBold().run()}
@@ -150,8 +189,21 @@ export function RichTextEditor({
         <Btn onClick={setLink} on={editor.isActive("link")} title="Chèn / sửa link">
           <Link2 size={15} />
         </Btn>
-        <Btn onClick={addImage} on={false} title="Chèn ảnh">
+        <Btn
+          onClick={() => imageInputRef.current?.click()}
+          on={false}
+          disabled={uploading !== null}
+          title="Tải ảnh lên"
+        >
           <ImageIcon size={15} />
+        </Btn>
+        <Btn
+          onClick={() => videoInputRef.current?.click()}
+          on={false}
+          disabled={uploading !== null}
+          title="Tải video lên"
+        >
+          <Film size={15} />
         </Btn>
         <i className="cms-rte-sep" />
         <Btn
@@ -171,6 +223,14 @@ export function RichTextEditor({
           <Redo2 size={15} />
         </Btn>
       </div>
+      {uploading && (
+        <div className="cms-rte-uploading">
+          Đang tải {uploading.kind === "video" ? "video" : "ảnh"}… {uploading.pct}%
+          <span className="cms-rte-uploading-bar">
+            <span style={{ width: `${uploading.pct}%` }} />
+          </span>
+        </div>
+      )}
       <EditorContent editor={editor} />
     </div>
   );

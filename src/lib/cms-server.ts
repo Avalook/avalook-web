@@ -12,6 +12,7 @@
 
 import { createServerFn } from "@tanstack/react-start";
 import { useSession } from "@tanstack/react-start/server";
+import { generateClientTokenFromReadWriteToken } from "@vercel/blob/client";
 import type { CmsState } from "@/components/cms/types";
 
 type SessionData = { authed?: boolean };
@@ -49,6 +50,51 @@ export const logoutFn = createServerFn({ method: "POST" }).handler(async () => {
   await session.clear();
   return { ok: true as const };
 });
+
+// Content types accepted for direct uploads (images + common web video).
+const UPLOAD_CONTENT_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/gif",
+  "image/webp",
+  "image/avif",
+  "image/svg+xml",
+  "video/mp4",
+  "video/webm",
+  "video/quicktime",
+];
+
+// Mint a short-lived client token so the browser can upload a file straight to
+// Vercel Blob (bypassing the 4.5 MB serverless body limit — needed for video).
+// Requires BLOB_READ_WRITE_TOKEN (Vercel → Storage → Blob → connect to project).
+export const blobUploadTokenFn = createServerFn({ method: "POST" })
+  .validator((d: { pathname: string }) => d)
+  .handler(async ({ data }) => {
+    const session = await cmsSession();
+    if (!session.data.authed) {
+      return { ok: false as const, error: "Chưa đăng nhập." };
+    }
+    const token = process.env.BLOB_READ_WRITE_TOKEN;
+    if (!token) {
+      return { ok: false as const, error: "Server chưa cấu hình BLOB_READ_WRITE_TOKEN." };
+    }
+    try {
+      const clientToken = await generateClientTokenFromReadWriteToken({
+        token,
+        pathname: data.pathname,
+        addRandomSuffix: true,
+        allowedContentTypes: UPLOAD_CONTENT_TYPES,
+        maximumSizeInBytes: 1024 * 1024 * 1024, // 1 GB ceiling
+        validUntil: Date.now() + 60 * 60 * 1000, // 1h — long enough for big videos
+      });
+      return { ok: true as const, clientToken };
+    } catch (e) {
+      return {
+        ok: false as const,
+        error: `Không tạo được token upload: ${String(e).slice(0, 200)}`,
+      };
+    }
+  });
 
 export const publishFn = createServerFn({ method: "POST" })
   .validator((d: { state: CmsState }) => d)

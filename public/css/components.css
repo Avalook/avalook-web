@@ -1591,6 +1591,22 @@ body.menu-open .nav-toggle span {
   border-radius: 18px;
   margin: 24px 0;
 }
+.rich-copy video,
+.rich-copy iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border: 0;
+  border-radius: 18px;
+  margin: 24px 0;
+}
+.rich-copy video {
+  height: auto;
+}
+.rich-copy iframe {
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
 
 .detail-video {
   width: 100%;

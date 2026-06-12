@@ -10,7 +10,7 @@ export function RichText({ paragraphs, className }: { paragraphs: string[]; clas
   const cls = className ? `rich-copy ${className}` : "rich-copy";
   const isHtmlBlob =
     paragraphs.length === 1 &&
-    /<(p|h[1-6]|ul|ol|li|blockquote|figure|img|hr|table)\b/i.test(paragraphs[0]);
+    /<(p|h[1-6]|ul|ol|li|blockquote|figure|img|video|iframe|hr|table)\b/i.test(paragraphs[0]);
 
   if (isHtmlBlob) {
     return <div className={cls} dangerouslySetInnerHTML={{ __html: paragraphs[0] }} />;

@@ -44,7 +44,7 @@ const s = (v: unknown): string => (v == null ? "" : String(v));
 const toBody = (raw: string): string[] => {
   const v = raw.trim();
   if (!v) return [];
-  if (/<(p|h[1-6]|ul|ol|li|blockquote|figure|img|hr|table)\b/i.test(v)) return [v];
+  if (/<(p|h[1-6]|ul|ol|li|blockquote|figure|img|video|iframe|hr|table)\b/i.test(v)) return [v];
   return v
     .split(/\n\n+/)
     .map((p) => p.trim())

@@ -3,6 +3,7 @@ import { X, ImageOff } from "lucide-react";
 import type { Collection, Field, Item } from "./types";
 import { slugify, uid } from "./storage";
 import { RichTextEditor } from "./RichTextEditor";
+import { MediaUpload } from "./MediaUpload";
 
 type Props = {
   collection: Collection;
@@ -246,25 +247,39 @@ function FieldEditor({
         />
       );
 
-    case "image":
+    case "image": {
+      const val = asString(value);
+      const isVideo = /\.(mp4|webm|mov|m4v)(\?|#|$)/i.test(val);
       return (
         <div className="cms-img-edit">
-          {asString(value) ? (
-            <img className="cms-img-preview" src={asString(value)} alt="" />
+          {val ? (
+            isVideo ? (
+              <video className="cms-img-preview" src={val} muted playsInline />
+            ) : (
+              <img className="cms-img-preview" src={val} alt="" />
+            )
           ) : (
             <span className="cms-img-preview cms-thumb-empty">
               <ImageOff size={20} />
             </span>
           )}
-          <input
-            id={id}
-            className="cms-input"
-            value={asString(value)}
-            placeholder="/assets/img/cover.jpg or https://…"
-            onChange={(e) => onChange(e.target.value)}
-          />
+          <div className="cms-img-edit-main">
+            <input
+              id={id}
+              className="cms-input"
+              value={val}
+              placeholder="Tải lên, hoặc dán /assets/img/cover.jpg hay https://…"
+              onChange={(e) => onChange(e.target.value)}
+            />
+            <MediaUpload
+              accept="image/*,video/*"
+              label="Tải ảnh / video lên"
+              onUploaded={onChange}
+            />
+          </div>
         </div>
       );
+    }
 
     case "reference": {
       const target = collections.find((c) => c.id === field.referencedCollection);

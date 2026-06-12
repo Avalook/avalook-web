@@ -853,6 +853,41 @@
 .cms-img-edit .cms-input {
   flex: 1 1 auto;
 }
+.cms-img-edit-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* upload widget — Image field and any other media upload */
+.cms-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cms-upload-btn {
+  align-self: flex-start;
+  gap: 6px;
+}
+.cms-upload-bar {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--cms-line);
+  overflow: hidden;
+}
+.cms-upload-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--cms-blue);
+  transition: width 0.15s ease;
+}
+.cms-upload-error {
+  margin: 0;
+  font-size: 12px;
+  color: #d23a3a;
+}
 
 /* item editor is a wider modal */
 .cms-modal.is-wide {
@@ -1153,4 +1188,37 @@
 }
 .cms-rte-input img.ProseMirror-selectednode {
   outline: 2px solid var(--cms-blue);
+}
+.cms-rte-input video {
+  max-width: 100%;
+  height: auto;
+  margin: 6px 0;
+  border-radius: 8px;
+}
+.cms-rte-input video.ProseMirror-selectednode {
+  outline: 2px solid var(--cms-blue);
+}
+/* upload progress strip below the editor toolbar */
+.cms-rte-uploading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  font-size: 13px;
+  color: var(--cms-muted);
+  border-bottom: 1px solid var(--cms-line);
+  background: #f7f8fa;
+}
+.cms-rte-uploading-bar {
+  flex: 1 1 auto;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--cms-line);
+  overflow: hidden;
+}
+.cms-rte-uploading-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--cms-blue);
+  transition: width 0.15s ease;
 }
