@@ -51,18 +51,10 @@ export const logoutFn = createServerFn({ method: "POST" }).handler(async () => {
   return { ok: true as const };
 });
 
-// Content types accepted for direct uploads (images + common web video).
-const UPLOAD_CONTENT_TYPES = [
-  "image/jpeg",
-  "image/png",
-  "image/gif",
-  "image/webp",
-  "image/avif",
-  "image/svg+xml",
-  "video/mp4",
-  "video/webm",
-  "video/quicktime",
-];
+// Content types accepted for direct uploads. Wildcards keep it permissive for
+// any image/video the browser reports (e.g. iPhone HEIC) while still blocking
+// arbitrary file types.
+const UPLOAD_CONTENT_TYPES = ["image/*", "video/*"];
 
 // Mint a short-lived client token so the browser can upload a file straight to
 // Vercel Blob (bypassing the 4.5 MB serverless body limit — needed for video).
