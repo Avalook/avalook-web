@@ -56,6 +56,15 @@ export const logoutFn = createServerFn({ method: "POST" }).handler(async () => {
 // arbitrary file types.
 const UPLOAD_CONTENT_TYPES = ["image/*", "video/*"];
 
+// Read BLOB_READ_WRITE_TOKEN robustly: tolerate a value pasted with wrapping
+// quotes or the whole `.env` line (BLOB_READ_WRITE_TOKEN="vercel_blob_rw_…").
+// A stray quote ends up in the store id → "Header … has invalid value".
+function readBlobToken(): string {
+  const raw = (process.env.BLOB_READ_WRITE_TOKEN ?? "").trim();
+  const match = raw.match(/vercel_blob_rw_[A-Za-z0-9_-]+/);
+  return match ? match[0] : raw.replace(/^["']|["']$/g, "").trim();
+}
+
 // Mint a short-lived client token so the browser can upload a file straight to
 // Vercel Blob (bypassing the 4.5 MB serverless body limit — needed for video).
 // Requires BLOB_READ_WRITE_TOKEN (Vercel → Storage → Blob → connect to project).
@@ -66,7 +75,7 @@ export const blobUploadTokenFn = createServerFn({ method: "POST" })
     if (!session.data.authed) {
       return { ok: false as const, error: "Chưa đăng nhập." };
     }
-    const token = process.env.BLOB_READ_WRITE_TOKEN;
+    const token = readBlobToken();
     if (!token) {
       return { ok: false as const, error: "Server chưa cấu hình BLOB_READ_WRITE_TOKEN." };
     }
