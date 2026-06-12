@@ -68,15 +68,15 @@
           "slug": "meet-avalook-team-at-ava-exhibition-2024"
         },
         {
-          "_id": "exciting-news-mr-quang-dang-the-visionary-founder-of-avalook-has-been-named-the-3rd-judge-in-the",
-          "status": "published",
           "title": "Exciting news! Mr. Quang Dang, the visionary founder of Avalook, has been named the 3rd judge in the Pudgy Asia Art Contest.",
           "cover": "/assets/img/5c4f61_6a82eee2a2bd44ec961e48d687c56572~mv2.png",
           "date": "Nov 28, 2024",
           "readingTime": "1 min read",
           "excerpt": "For more information: https://x.com/PunkgaMeManga/status/1832428369658388778",
-          "body": "For more information: <a href=\"https://x.com/PunkgaMeManga/status/1832428369658388778\">https://x.com/PunkgaMeManga/status/1832428369658388778</a>",
-          "slug": "exciting-news-mr-quang-dang-the-visionary-founder-of-avalook-has-been-named-the-3rd-judge-in-the"
+          "body": "<p><strong><em>For more information: </em></strong></p><p><a target=\"_blank\" rel=\"noopener\" href=\"https://x.com/PunkgaMeManga/status/1832428369658388778\">https://x.com/PunkgaMeManga/status/1832428369658388778</a></p>",
+          "slug": "exciting-news-mr-quang-dang-the-visionary-founder-of-avalook-has-been-named-the-3rd-judge-in-the",
+          "_id": "exciting-news-mr-quang-dang-the-visionary-founder-of-avalook-has-been-named-the-3rd-judge-in-the",
+          "status": "published"
         },
         {
           "_id": "we-re-thrilled-to-announce-that-avalook-is-proudly-sponsoring-non-fungible-saigon-2024-the-ultimate",
@@ -529,5 +529,5 @@
       ]
     }
   ],
-  "activeCollectionId": "projects"
+  "activeCollectionId": "blog-posts"
 }
